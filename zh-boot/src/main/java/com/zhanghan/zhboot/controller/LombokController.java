@@ -19,7 +19,7 @@ public class LombokController {
         map.put("intLombok", lombokRequest.getIntLombok());
         map.put("strLombok", lombokRequest.getStrLombok());
         map.put("boleanLombok", lombokRequest.getBoleanLombok());
-        map.put("mapLombok", lombokRequest.getMapLombok());
+        map.put("personLombok", lombokRequest.getPersonLombok());
         return map;
     }
 
