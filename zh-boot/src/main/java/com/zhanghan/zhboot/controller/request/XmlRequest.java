@@ -5,11 +5,9 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 import lombok.Data;
 
-import java.io.Serializable;
-
 @JacksonXmlRootElement(localName = "school")
 @Data
-public class XmlRequest implements Serializable {
+public class XmlRequest {
 
     @JacksonXmlProperty(localName = "id")
     private Integer id;
