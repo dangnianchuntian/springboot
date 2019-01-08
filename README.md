@@ -38,10 +38,12 @@
     * 启动zh-boot
     * 访问 http://localhost:8080/analysisXml
     * 参数：
+    ```xml
       <school>
 	       <id>1111</id>
 	       <name>沙河市第一高级中学</name>
 	       <shortname>沙河一中</shortname>
       </school>
+    ```     
 
 * 博客地址：https://blog.csdn.net/zhanghan18333611647/article/details/86098569 
