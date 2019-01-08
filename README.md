@@ -12,6 +12,7 @@
     * 启动zh-boot
     * 访问 http://localhost:8080/lombok
     * 参数：
+    ```json
       {
         "intLombok":3,
         "strLombok":"zhanghan",
@@ -21,6 +22,7 @@
           "age":15
         }
      }
+    ```
 
 * 博客地址：https://blog.csdn.net/zhanghan18333611647/article/details/86095583 
 
