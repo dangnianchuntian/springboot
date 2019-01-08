@@ -24,7 +24,7 @@
       }
     ```
 
-* 博客地址：https://blog.csdn.net/zhanghan18333611647/article/details/86095583 
+* 博客地址：[Java基础（十三）:使用Lombok简化你的代码](https://blog.csdn.net/zhanghan18333611647/article/details/86095583 "别忘记点赞哦") 
 
 
 
@@ -48,4 +48,4 @@
       </school>
     ```     
 
-* 博客地址：https://blog.csdn.net/zhanghan18333611647/article/details/86098569 
+* 博客地址：[Java基础（十四）:SpringMvc接收xml请求](https://blog.csdn.net/zhanghan18333611647/article/details/86098569 "别忘记点赞哦") 
