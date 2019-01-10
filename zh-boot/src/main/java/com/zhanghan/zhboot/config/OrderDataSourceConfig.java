@@ -1,6 +1,8 @@
 package com.zhanghan.zhboot.config;
 
+import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
+import com.zhanghan.zhboot.properties.OrderDataSourceProperties;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.annotation.MapperScan;
@@ -25,7 +27,7 @@ public class OrderDataSourceConfig {
 
     @Bean(name = "orderDataSource")
     public DataSource orderDataSource() {
-        com.zaxxer.hikari.HikariConfig config = new com.zaxxer.hikari.HikariConfig();
+        HikariConfig config = new HikariConfig();
         config.setJdbcUrl(orderDataSourceProperties.getUrl());
         config.setUsername(orderDataSourceProperties.getUsername());
         config.setPassword(orderDataSourceProperties.getPassword());

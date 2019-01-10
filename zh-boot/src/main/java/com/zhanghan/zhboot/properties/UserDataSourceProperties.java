@@ -1,4 +1,4 @@
-package com.zhanghan.zhboot.config;
+package com.zhanghan.zhboot.properties;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -7,8 +7,8 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Data
-@ConfigurationProperties(prefix = "order.datasource")
-public class OrderDataSourceProperties {
+@ConfigurationProperties(prefix = "user.datasource")
+public class UserDataSourceProperties {
 
     private String url;
 
@@ -25,4 +25,7 @@ public class OrderDataSourceProperties {
     private Integer maximumPoolSize;
 
     private Integer minimumIdle;
+
+
+
 }

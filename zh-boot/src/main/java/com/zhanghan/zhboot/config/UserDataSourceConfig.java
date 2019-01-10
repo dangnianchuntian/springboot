@@ -1,6 +1,8 @@
 package com.zhanghan.zhboot.config;
 
 import com.zaxxer.hikari.HikariConfig;
+import com.zaxxer.hikari.HikariDataSource;
+import com.zhanghan.zhboot.properties.UserDataSourceProperties;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.annotation.MapperScan;
@@ -24,7 +26,7 @@ public class UserDataSourceConfig {
 
 
     @Bean(name = "userDataSource")
-    public DataSource appDataSource() {
+    public DataSource userDataSource() {
         HikariConfig config = new HikariConfig();
         config.setJdbcUrl(userDataSourceProperties.getUrl());
         config.setUsername(userDataSourceProperties.getUsername());
@@ -35,12 +37,12 @@ public class UserDataSourceConfig {
         config.setMaxLifetime(userDataSourceProperties.getMaxLifetime());
         config.setMaximumPoolSize(userDataSourceProperties.getMaximumPoolSize());
         config.setMinimumIdle(userDataSourceProperties.getMinimumIdle());
-        return new com.zaxxer.hikari.HikariDataSource(config);
+        return new HikariDataSource(config);
     }
 
     @Bean(name = "userTransactionManager")
     public DataSourceTransactionManager userTransactionManager() {
-        return new DataSourceTransactionManager(appDataSource());
+        return new DataSourceTransactionManager(userDataSource());
     }
 
     @Bean(name = "userSqlSessionFactory")
