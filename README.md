@@ -76,3 +76,21 @@
 
 * 博客地址：[Java基础（十五）:SpringBoot、Mybatis配置多数据源](https://blog.csdn.net/zhanghan18333611647/article/details/86363865 "别忘记点赞哦") 
 
+
+
+# 4.SpringBoot整合Redis
+
+* 功能：SpringBoot中集成Redis操作
+
+* 包含模块：  
+    * RedisProperties：读取配置文件中配置Redis的属性值
+    * RedisConfig：建立操作Redis的Template
+    * OrderServiceImpl：演示效果的Service
+    * RedisController：演示操作Redis效果   
+    
+* 启动项目并验证
+    * 启动zh-boot
+    * 访问 http://localhost:8080/get/redis
+ 
+
+* 博客地址：[Java基础（十六）:SpringBoot整合Redis](https://blog.csdn.net/zhanghan18333611647/article/details/86366865 "别忘记点赞哦") 
