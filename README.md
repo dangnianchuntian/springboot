@@ -53,7 +53,7 @@
 
 # 3.SpringBoot Mybatis 添加多数据源
 
-* 功能：SpringBoot一个项目添加多个数据源，数据库连接池用的是高性能的Hikari(springboot2.0以后的默认数据库连接池)
+* 功能：SpringBoot一个项目添加多个数据源，数据库连接池用的是高性能的HikariCP(springboot2.0以后的默认数据库连接池)
 
 * 包含模块：  
     * OrderRequest：演示使用SpringMvc接收mobile参数
