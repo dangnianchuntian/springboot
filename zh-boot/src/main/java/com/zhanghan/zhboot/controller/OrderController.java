@@ -15,7 +15,7 @@ public class OrderController {
     private OrderService orderService;
 
     @RequestMapping(value = "/get/order/borrow", method = RequestMethod.POST)
-    public Object a(@RequestBody OrderRequest orderRequest) {
+    public Object getOrderBorrow(@RequestBody OrderRequest orderRequest) {
         return orderService.findOrder(orderRequest);
     }
 }
