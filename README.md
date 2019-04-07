@@ -94,3 +94,19 @@
  
 
 * 博客地址：[Java基础（十六）:SpringBoot整合Redis](https://blog.csdn.net/zhanghan18333611647/article/details/86366865 "别忘记点赞哦") 
+
+# 5.SpringBoot增加健康检查
+
+* 功能：SpringBoot中增加健康检查
+
+* 包含模块：  
+    * Pom：增加spring-boot-starter-actuator依赖
+    * application.properties：根据Spring Boot的版本（2.0前还是2.0后）增加相关的配置
+  
+    
+* 启动项目并验证
+    * 启动zh-boot
+    * 访问 http://127.0.0.1:8080/health
+ 
+
+* 博客地址：[Java基础（十七）:SpringBoot配置健康检查与监控](https://blog.csdn.net/zhanghan18333611647/article/details/89068368 "别忘记点赞哦") 
