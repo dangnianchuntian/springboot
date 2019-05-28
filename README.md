@@ -110,3 +110,19 @@
  
 
 * 博客地址：[Java基础（十七）:SpringBoot配置健康检查与监控](https://blog.csdn.net/zhanghan18333611647/article/details/89068368 "别忘记点赞哦") 
+
+
+# 6.Redis Pipeline 轻松实现百倍性能提升
+
+* 功能：增加Redis Pipeline实现方式
+
+* 包含模块：  
+    * RedisController：增加Redis Pipeline 操作Redis
+  
+    
+* 启动项目并验证
+    * 启动zh-boot
+    * 访问 http://127.0.0.1:8080/add/pipeline 和 http://127.0.0.1:8080/add/single
+ 
+
+* 博客地址：[Redis Pipeline 轻松实现百倍性能提升](https://blog.csdn.net/zhanghan18333611647/article/details/90646951 "别忘记点赞哦") 
