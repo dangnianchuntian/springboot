@@ -2,6 +2,9 @@ package com.zhanghan.zhboot.controller;
 
 import com.mysql.jdbc.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
+import org.springframework.data.redis.connection.RedisConnection;
+import org.springframework.data.redis.core.RedisCallback;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -52,6 +55,26 @@ public class RedisController {
         result.put(booleanRedisKey, booleanRedisValue);
 
         return result;
+    }
+
+    @RequestMapping(value = "/add/pipeline", method = RequestMethod.GET)
+    public void addPipeline() {
+        strRedisTemplate.executePipelined(new RedisCallback<String>() {
+            @Override
+            public String doInRedis(RedisConnection connection) throws DataAccessException {
+                for (int i = 0; i < 100; i++) {
+                    connection.set(("pipel:" + i).getBytes(), "123".getBytes());
+                }
+                return null;
+            }
+        });
+    }
+
+    @RequestMapping(value = "/add/single", method = RequestMethod.GET)
+    public void addSingle() {
+        for (int i = 0; i < 100; i++) {
+            strRedisTemplate.opsForValue().set("single:" + i, "123");
+        }
     }
 
 }
