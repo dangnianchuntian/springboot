@@ -143,4 +143,4 @@
     * 访问 http://127.0.0.1:8080/bad/check/mobile 和 http://127.0.0.1:8080/good/check/mobile
  
 
-* 博客地址：[Redis Pipeline 轻松实现百倍性能提升](https://blog.csdn.net/zhanghan18333611647/article/details/90646951 "别忘记点赞哦") 
+* 博客地址：[替代if的优雅方案，提高程序扩展性](https://blog.csdn.net/zhanghan18333611647/article/details/91603890 "别忘记点赞哦") 
