@@ -126,3 +126,21 @@
  
 
 * 博客地址：[Redis Pipeline 轻松实现百倍性能提升](https://blog.csdn.net/zhanghan18333611647/article/details/90646951 "别忘记点赞哦") 
+
+
+# 7.优雅替代if判断；提高系统的扩展性
+
+* 功能：优雅替代if判断；提高系统的扩展性
+
+* 包含模块：  
+    * CheckMobileController：演示校验手机号前缀的两种方式
+    * MobilePreFixProperties：从配置文件中读取配置国家和手机号前缀的对应关系
+    * application：增加国家和手机前缀对应关系
+  
+    
+* 启动项目并验证
+    * 启动zh-boot
+    * 访问 http://127.0.0.1:8080/bad/check/mobile 和 http://127.0.0.1:8080/good/check/mobile
+ 
+
+* 博客地址：[Redis Pipeline 轻松实现百倍性能提升](https://blog.csdn.net/zhanghan18333611647/article/details/90646951 "别忘记点赞哦") 
