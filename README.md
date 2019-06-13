@@ -2,6 +2,8 @@
   
 # 1.Lombok
 
+* 代码版本: 1.0.0-Release
+
 * 功能：使用Lombok简化代码
 
 * 包含模块：  
@@ -24,11 +26,13 @@
       }
     ```
 
-* 博客地址：[Java基础（十三）:使用Lombok简化你的代码](https://blog.csdn.net/zhanghan18333611647/article/details/86095583 "别忘记点赞哦") 
+* 博客地址：[使用Lombok简化你的代码](https://blog.csdn.net/zhanghan18333611647/article/details/86095583 "别忘记点赞哦") 
 
 
 
 # 2.SpringMvc解析XML
+
+* 代码版本: 1.0.0-Release
 
 * 功能：SpringMvc解析xml参数请求
 
@@ -48,10 +52,12 @@
       </school>
     ```     
 
-* 博客地址：[Java基础（十四）:SpringMvc接收xml请求](https://blog.csdn.net/zhanghan18333611647/article/details/86098569 "别忘记点赞哦")
+* 博客地址：[SpringMvc接收xml请求](https://blog.csdn.net/zhanghan18333611647/article/details/86098569 "别忘记点赞哦")
 
 
 # 3.SpringBoot Mybatis 添加多数据源
+
+* 代码版本: 1.0.0-Release
 
 * 功能：SpringBoot一个项目添加多个数据源，数据库连接池用的是高性能的HikariCP(springboot2.0以后的默认数据库连接池)
 
@@ -74,11 +80,13 @@
      }
     ```     
 
-* 博客地址：[Java基础（十五）:SpringBoot、Mybatis配置多数据源](https://blog.csdn.net/zhanghan18333611647/article/details/86363865 "别忘记点赞哦") 
+* 博客地址：[SpringBoot整合Mybatis配置多数据源](https://blog.csdn.net/zhanghan18333611647/article/details/86363865 "别忘记点赞哦") 
 
 
 
 # 4.SpringBoot整合Redis
+
+* 代码版本: 1.0.0-Release
 
 * 功能：SpringBoot中集成Redis操作
 
@@ -93,9 +101,11 @@
     * 访问 http://localhost:8080/get/redis
  
 
-* 博客地址：[Java基础（十六）:SpringBoot整合Redis](https://blog.csdn.net/zhanghan18333611647/article/details/86366865 "别忘记点赞哦") 
+* 博客地址：[SpringBoot整合Redis](https://blog.csdn.net/zhanghan18333611647/article/details/86366865 "别忘记点赞哦") 
 
 # 5.SpringBoot增加健康检查
+
+* 代码版本: 1.0.0-Release
 
 * 功能：SpringBoot中增加健康检查
 
@@ -109,10 +119,12 @@
     * 访问 http://127.0.0.1:8080/health
  
 
-* 博客地址：[Java基础（十七）:SpringBoot配置健康检查与监控](https://blog.csdn.net/zhanghan18333611647/article/details/89068368 "别忘记点赞哦") 
+* 博客地址：[SpringBoot配置健康检查与监控](https://blog.csdn.net/zhanghan18333611647/article/details/89068368 "别忘记点赞哦") 
 
 
 # 6.Redis Pipeline 轻松实现百倍性能提升
+
+* 代码版本: 1.0.0-Release
 
 * 功能：增加Redis Pipeline实现方式
 
@@ -129,6 +141,8 @@
 
 
 # 7.优雅替代if判断；提高系统的扩展性
+
+* 代码版本: 1.0.0-Release
 
 * 功能：优雅替代if判断；提高系统的扩展性
 
