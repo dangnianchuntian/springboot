@@ -171,6 +171,7 @@
     * Pom：增加Swagger的依赖
     * SwaggerConfig：配置生效Swagger
     * 相应的Controller以及Request实体：增加Swagger的注释
+    * application：增加是否启用swagger开关（一般生产环境关闭swagger防止被其他人扫描，测试和开发环境打开便于联调）
   
     
 * 启动项目并验证
