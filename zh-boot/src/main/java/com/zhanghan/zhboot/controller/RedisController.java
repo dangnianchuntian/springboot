@@ -1,6 +1,8 @@
 package com.zhanghan.zhboot.controller;
 
 import com.mysql.jdbc.StringUtils;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.redis.connection.RedisConnection;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.HashMap;
 import java.util.Map;
 
+@Api(value = "演示Redis控制器",tags = {"演示Redis控制器"})
 @RestController
 public class RedisController {
 
@@ -24,6 +27,7 @@ public class RedisController {
     @Autowired
     private RedisTemplate<String, Boolean> booleanRedisTemplate;
 
+    @ApiOperation(value="获取Redis中的值",tags = {"演示Redis控制器"})
     @RequestMapping(value = "/get/redis", method = RequestMethod.GET)
     public Map xmlAnalysis() {
         String strRedisKey = "zh:boot:String";
@@ -57,6 +61,7 @@ public class RedisController {
         return result;
     }
 
+    @ApiOperation(value="通道添加到Redis方式",tags = {"演示Redis控制器"})
     @RequestMapping(value = "/add/pipeline", method = RequestMethod.GET)
     public void addPipeline() {
         strRedisTemplate.executePipelined(new RedisCallback<String>() {
@@ -70,6 +75,7 @@ public class RedisController {
         });
     }
 
+    @ApiOperation(value="普通多条添加到Redis方式",tags = {"演示Redis控制器"})
     @RequestMapping(value = "/add/single", method = RequestMethod.GET)
     public void addSingle() {
         for (int i = 0; i < 100; i++) {
