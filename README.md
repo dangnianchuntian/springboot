@@ -158,3 +158,24 @@
  
 
 * 博客地址：[替代if的优雅方案，提高程序扩展性](https://blog.csdn.net/zhanghan18333611647/article/details/91603890 "别忘记点赞哦") 
+
+
+
+# 8.SpringBoot集成Swagger
+
+* 代码版本: 1.1.0-Release
+
+* 功能：SpringBoot集成Swagger
+
+* 包含模块：  
+    * Pom：增加Swagger的依赖
+    * SwaggerConfig：配置生效Swagger
+    * 相应的Controller以及Request实体：增加Swagger的注释
+  
+    
+* 启动项目并验证
+    * 启动zh-boot
+    * 访问 http://localhost:8080/swagger-ui.html#/
+ 
+
+* 博客地址：[SpringBoot集成Swagger](https://blog.csdn.net/zhanghan18333611647/article/details/91603890 "别忘记点赞哦") 
