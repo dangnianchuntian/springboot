@@ -163,7 +163,7 @@
 
 # 8.SpringBoot集成Swagger
 
-* 代码版本: 1.0.0-Release
+* 代码版本: 1.1.0-Release
 
 * 功能：SpringBoot集成Swagger
 
