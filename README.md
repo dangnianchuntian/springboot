@@ -160,7 +160,6 @@
 * 博客地址：[替代if的优雅方案，提高程序扩展性](https://blog.csdn.net/zhanghan18333611647/article/details/91603890 "别忘记点赞哦") 
 
 
-
 # 8.SpringBoot集成Swagger
 
 * 代码版本: 1.1.0-Release
@@ -174,6 +173,25 @@
     * application：增加是否启用swagger开关（一般生产环境关闭swagger防止被其他人扫描，测试和开发环境打开便于联调）
   
     
+* 启动项目并验证
+    * 启动zh-boot
+    * 访问 http://localhost:8080/swagger-ui.html#/
+ 
+
+* 博客地址：[SpringBoot集成Swagger](https://blog.csdn.net/zhanghan18333611647/article/details/91900759 "别忘记点赞哦") 
+
+
+# 9.规范返回值
+
+* 代码版本: 1.2.0-Release
+
+* 功能：SpringBoot 规范返回值
+
+* 包含模块：  
+    * WrapMapper：统一返回值格式操作工具类
+    * Wrapper：统一返回值格式类
+    * 相应的Controller：修改返回值类型
+          
 * 启动项目并验证
     * 启动zh-boot
     * 访问 http://localhost:8080/swagger-ui.html#/
