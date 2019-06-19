@@ -1,6 +1,18 @@
+/*
+ * Copyright (c) 2019. zhanghan_java@163.com All Rights Reserved.
+ * 项目名称：实战SpringBoot
+ * 类名称：RedisController.java
+ * 创建人：张晗
+ * 联系方式：zhanghan_java@163.com
+ * 开源地址: https://github.com/dangnianchuntian/springboot
+ * 博客地址: https://blog.csdn.net/zhanghan18333611647
+ */
+
 package com.zhanghan.zhboot.controller;
 
 import com.mysql.jdbc.StringUtils;
+import com.zhanghan.zhboot.util.wrapper.WrapMapper;
+import com.zhanghan.zhboot.util.wrapper.Wrapper;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +28,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.HashMap;
 import java.util.Map;
 
-@Api(value = "演示Redis控制器",tags = {"演示Redis控制器"})
+@Api(value = "演示Redis控制器", tags = {"演示Redis控制器"})
 @RestController
 public class RedisController {
 
@@ -27,9 +39,9 @@ public class RedisController {
     @Autowired
     private RedisTemplate<String, Boolean> booleanRedisTemplate;
 
-    @ApiOperation(value="获取Redis中的值",tags = {"演示Redis控制器"})
+    @ApiOperation(value = "获取Redis中的值", tags = {"演示Redis控制器"})
     @RequestMapping(value = "/get/redis", method = RequestMethod.GET)
-    public Map xmlAnalysis() {
+    public Wrapper xmlAnalysis() {
         String strRedisKey = "zh:boot:String";
         String longRedisKey = "zh:boot:long";
         String booleanRedisKey = "zh:boot:bollean";
@@ -58,12 +70,12 @@ public class RedisController {
         result.put(longRedisKey, longRedisValue);
         result.put(booleanRedisKey, booleanRedisValue);
 
-        return result;
+        return WrapMapper.ok(result);
     }
 
-    @ApiOperation(value="通道添加到Redis方式",tags = {"演示Redis控制器"})
+    @ApiOperation(value = "通道添加到Redis方式", tags = {"演示Redis控制器"})
     @RequestMapping(value = "/add/pipeline", method = RequestMethod.GET)
-    public void addPipeline() {
+    public Wrapper addPipeline() {
         strRedisTemplate.executePipelined(new RedisCallback<String>() {
             @Override
             public String doInRedis(RedisConnection connection) throws DataAccessException {
@@ -73,14 +85,18 @@ public class RedisController {
                 return null;
             }
         });
+
+        return WrapMapper.ok();
     }
 
-    @ApiOperation(value="普通多条添加到Redis方式",tags = {"演示Redis控制器"})
+    @ApiOperation(value = "普通多条添加到Redis方式", tags = {"演示Redis控制器"})
     @RequestMapping(value = "/add/single", method = RequestMethod.GET)
-    public void addSingle() {
+    public Wrapper addSingle() {
         for (int i = 0; i < 100; i++) {
             strRedisTemplate.opsForValue().set("single:" + i, "123");
         }
+
+        return WrapMapper.ok();
     }
 
 }

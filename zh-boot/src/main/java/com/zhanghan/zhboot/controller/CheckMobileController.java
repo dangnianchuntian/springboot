@@ -1,8 +1,20 @@
+/*
+ * Copyright (c) 2019. zhanghan_java@163.com All Rights Reserved.
+ * 项目名称：实战SpringBoot
+ * 类名称：CheckMobileController.java
+ * 创建人：张晗
+ * 联系方式：zhanghan_java@163.com
+ * 开源地址: https://github.com/dangnianchuntian/springboot
+ * 博客地址: https://blog.csdn.net/zhanghan18333611647
+ */
+
 package com.zhanghan.zhboot.controller;
 
 import com.mysql.jdbc.StringUtils;
 import com.zhanghan.zhboot.controller.request.MobileCheckRequest;
 import com.zhanghan.zhboot.properties.MobilePreFixProperties;
+import com.zhanghan.zhboot.util.wrapper.WrapMapper;
+import com.zhanghan.zhboot.util.wrapper.Wrapper;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,13 +36,13 @@ public class CheckMobileController {
 
     @ApiOperation(value="优雅校验手机号格式方式",tags = {"校验手机号控制器"})
     @RequestMapping(value = "/good/check/mobile", method = RequestMethod.POST)
-    public Map goodCheckMobile(@RequestBody @Validated MobileCheckRequest mobileCheckRequest) {
+    public Wrapper goodCheckMobile(@RequestBody @Validated MobileCheckRequest mobileCheckRequest) {
 
         String countryCode = mobileCheckRequest.getCountryCode();
         String proFix = mobilePreFixProperties.getPrefixs().get(countryCode);
 
         if (StringUtils.isNullOrEmpty(proFix)) {
-            return buildFailResponse();
+            return WrapMapper.error("参数错误");
         }
 
         String mobile = mobileCheckRequest.getMobile();
@@ -42,16 +54,15 @@ public class CheckMobileController {
 
 
         Map map = new HashMap();
-        map.put("code", 0);
         map.put("mobile", mobile);
         map.put("isLegal", isLegal);
         map.put("proFix", proFix);
-        return map;
+        return WrapMapper.ok(map);
     }
 
     @ApiOperation(value="扩展性差校验手机号格式方式",tags = {"校验手机号控制器"})
     @RequestMapping(value = "/bad/check/mobile", method = RequestMethod.POST)
-    public Map badCheckMobile(@RequestBody MobileCheckRequest mobileCheckRequest) {
+    public Wrapper badCheckMobile(@RequestBody MobileCheckRequest mobileCheckRequest) {
 
         String countryCode = mobileCheckRequest.getCountryCode();
 
@@ -61,7 +72,7 @@ public class CheckMobileController {
         } else if (countryCode.equals("US")) {
             proFix = "1";
         } else {
-            return buildFailResponse();
+            return WrapMapper.error("参数错误");
         }
 
         String mobile = mobileCheckRequest.getMobile();
@@ -71,23 +82,11 @@ public class CheckMobileController {
             isLegal = true;
         }
 
-
         Map map = new HashMap();
-        map.put("code", 0);
         map.put("mobile", mobile);
         map.put("isLegal", isLegal);
         map.put("proFix", proFix);
-        return map;
+        return  WrapMapper.ok(map);
     }
-
-    private Map buildFailResponse() {
-        Map map = new HashMap();
-        map.put("code", 1);
-        map.put("mobile", "");
-        map.put("isLegal", false);
-        map.put("proFix", "");
-        return map;
-    }
-
 
 }
