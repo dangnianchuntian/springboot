@@ -179,4 +179,4 @@
     * 访问 http://localhost:8080/swagger-ui.html#/
  
 
-* 博客地址：[SpringBoot集成Swagger](https://blog.csdn.net/zhanghan18333611647/article/details/91603890 "别忘记点赞哦") 
+* 博客地址：[SpringBoot集成Swagger](https://blog.csdn.net/zhanghan18333611647/article/details/91900759 "别忘记点赞哦") 
