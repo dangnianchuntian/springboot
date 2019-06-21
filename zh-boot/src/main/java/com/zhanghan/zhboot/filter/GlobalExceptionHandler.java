@@ -141,7 +141,7 @@ public class GlobalExceptionHandler {
      * @return the wrapper
      */
     @ExceptionHandler(Exception.class)
-    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    @ResponseStatus(HttpStatus.OK)
     @ResponseBody
     public Wrapper exception(Exception e) {
         log.error("Exception={}", e.getMessage(), e);
