@@ -49,7 +49,7 @@ public class Wrapper<T> implements Serializable {
 	/**
 	 * 错误信息.
 	 */
-	public static final String ERROR_MESSAGE = "内部异常";
+	public static final String ERROR_MESSAGE = "系统异常";
 
 	/**
 	 * 编号.
