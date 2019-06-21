@@ -27,7 +27,7 @@ import java.util.Map;
 @Api(value = "演示Lombok控制器",tags = {"演示Lombok控制器"})
 public class LombokController {
 
-    @ApiOperation(value="优雅校验手机号格式方式",tags = {"演示Lombok控制器"})
+    @ApiOperation(value="演示Lombok",tags = {"演示Lombok控制器"})
     @RequestMapping(value = "/lombok", method = RequestMethod.POST)
     public Wrapper lombok(@RequestBody LombokRequest lombokRequest) {
         System.out.println(lombokRequest.toString());
