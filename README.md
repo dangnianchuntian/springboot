@@ -198,3 +198,20 @@
  
 
 * 博客地址：[标准化json返回值](https://blog.csdn.net/zhanghan18333611647/article/details/92845986 "别忘记点赞哦") 
+
+
+# 10.统一异常处理
+
+* 代码版本: 1.3.0-Release
+
+* 功能：SpringBoot 添加统一异常处理
+
+* 包含模块：  
+    * GlobalExceptionHandler：拦截相关异常
+          
+* 启动项目并验证
+    * 启动zh-boot
+    * 访问 http://localhost:8080/swagger-ui.html#/
+ 
+
+* 博客地址：[统一异常处理](https://blog.csdn.net/zhanghan18333611647/article/details/92845986 "别忘记点赞哦") 
