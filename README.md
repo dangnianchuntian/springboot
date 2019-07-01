@@ -215,3 +215,21 @@
  
 
 * 博客地址：[统一异常处理](https://blog.csdn.net/zhanghan18333611647/article/details/93235833 "别忘记点赞哦") 
+
+
+# 11.图片上传
+
+* 代码版本: 1.4.0-Release
+
+* 功能：SpringBoot 添加图片上传
+
+* 包含模块：  
+    * MultipartConfig：文件统一配置类
+    * UpLoadController：图片上传controller    
+          
+* 启动项目并验证
+    * 启动zh-boot
+    * 访问 http://localhost:8080/swagger-ui.html#/
+ 
+
+* 博客地址：[统一异常处理](https://blog.csdn.net/zhanghan18333611647/article/details/93235833 "别忘记点赞哦") 
