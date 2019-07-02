@@ -232,4 +232,4 @@
     * 访问 http://localhost:8080/swagger-ui.html#/
  
 
-* 博客地址：[统一异常处理](https://blog.csdn.net/zhanghan18333611647/article/details/93235833 "别忘记点赞哦") 
+* 博客地址：[图片上传](https://blog.csdn.net/zhanghan18333611647/article/details/94411236 "别忘记点赞哦") 
