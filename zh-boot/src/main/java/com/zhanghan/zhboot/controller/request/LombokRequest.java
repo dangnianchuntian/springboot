@@ -5,7 +5,7 @@
  * 创建人：张晗
  * 联系方式：zhanghan_java@163.com
  * 开源地址: https://github.com/dangnianchuntian/springboot
- * 博客地址: https://blog.csdn.net/zhanghan18333611647
+ * 博客地址: https://zhanghan.blog.csdn.net
  */
 
 package com.zhanghan.zhboot.controller.request;
@@ -14,6 +14,8 @@ package com.zhanghan.zhboot.controller.request;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+
+import java.math.BigDecimal;
 
 @ApiModel("Lombok演示请求实体")
 @Data
@@ -27,7 +29,8 @@ public class LombokRequest {
     private Boolean boleanLombok;
     @ApiModelProperty(value = "实体类型")
     private Person personLombok;
-
+    @ApiModelProperty(value = "BigDecimal类型")
+    private BigDecimal bigDecimal;
     @Data
     private static class Person {
         private Integer age;

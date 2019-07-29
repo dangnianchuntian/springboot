@@ -5,7 +5,7 @@
  * 创建人：张晗
  * 联系方式：zhanghan_java@163.com
  * 开源地址: https://github.com/dangnianchuntian/springboot
- * 博客地址: https://blog.csdn.net/zhanghan18333611647
+ * 博客地址: https://zhanghan.blog.csdn.net
  */
 
 package com.zhanghan.zhboot.filter;
@@ -28,7 +28,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 /**
  * 全局的的异常拦截器
  *
- * @author https://blog.csdn.net/zhanghan18333611647
+ * @author https://zhanghan.blog.csdn.net
  */
 @Slf4j
 @RestControllerAdvice

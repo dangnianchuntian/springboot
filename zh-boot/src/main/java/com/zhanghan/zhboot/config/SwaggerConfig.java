@@ -5,7 +5,7 @@
  * 创建人：张晗
  * 联系方式：zhanghan_java@163.com
  * 开源地址: https://github.com/dangnianchuntian/springboot
- * 博客地址: https://blog.csdn.net/zhanghan18333611647
+ * 博客地址: https://zhanghan.blog.csdn.net
  */
 
 package com.zhanghan.zhboot.config;
@@ -62,8 +62,8 @@ public class SwaggerConfig {
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
                 .title("springboot集成swagger")
-                .description("简单优雅的restfun风格，https://blog.csdn.net/zhanghan18333611647")
-                .termsOfServiceUrl("https://blog.csdn.net/zhanghan18333611647")
+                .description("简单优雅的restfun风格，https://zhanghan.blog.csdn.net")
+                .termsOfServiceUrl("https://zhanghan.blog.csdn.net")
                 .version("1.0")
                 .build();
     }
