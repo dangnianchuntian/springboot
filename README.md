@@ -232,4 +232,22 @@
     * 访问 http://localhost:8080/swagger-ui.html#/
  
 
-* 博客地址：[统一异常处理](https://zhanghan.blog.csdn.net/article/details/93235833 "别忘记点赞哦") 
+* 博客地址：[图片上传](https://zhanghan.blog.csdn.net/article/details/94411236 "别忘记点赞哦") 
+
+
+# 12.金额校验
+
+* 代码版本: 1.4.0-Release
+
+* 功能：金额校验
+
+* 包含模块：  
+    * MoneyUtil：金额校验工具类
+    * CheckMoneyController：检验金额controller    
+          
+* 启动项目并验证
+    * 启动zh-boot
+    * 访问 http://localhost:8080/swagger-ui.html#/
+ 
+
+* 博客地址：[BigDecimal 金额校验]( "别忘记点赞哦") 
