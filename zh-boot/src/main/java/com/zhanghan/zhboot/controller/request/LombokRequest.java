@@ -15,8 +15,6 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
-import java.math.BigDecimal;
-
 @ApiModel("Lombok演示请求实体")
 @Data
 public class LombokRequest {
@@ -29,8 +27,7 @@ public class LombokRequest {
     private Boolean boleanLombok;
     @ApiModelProperty(value = "实体类型")
     private Person personLombok;
-    @ApiModelProperty(value = "BigDecimal类型")
-    private BigDecimal bigDecimal;
+
     @Data
     private static class Person {
         private Integer age;
