@@ -10,10 +10,13 @@
 
 package com.zhanghan.zhboot;
 
+import com.zhanghan.zhboot.filter.BodyReaderFilter;
 import org.mybatis.spring.boot.autoconfigure.MybatisAutoConfiguration;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
+import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication(exclude = {
         DataSourceAutoConfiguration.class,
@@ -24,14 +27,14 @@ public class ZhBootApplication {
         SpringApplication.run(ZhBootApplication.class, args);
     }
 
-//    @Bean
-//    public FilterRegistrationBean<BodyReaderFilter> Filters() {
-//        FilterRegistrationBean<BodyReaderFilter> registrationBean = new FilterRegistrationBean<BodyReaderFilter>();
-//        registrationBean.setFilter(new BodyReaderFilter());
-//        registrationBean.addUrlPatterns("/*");
-//        registrationBean.setName("bodyReaderFilter");
-//        return registrationBean;
-//    }
+    @Bean
+    public FilterRegistrationBean<BodyReaderFilter> Filters() {
+        FilterRegistrationBean<BodyReaderFilter> registrationBean = new FilterRegistrationBean<BodyReaderFilter>();
+        registrationBean.setFilter(new BodyReaderFilter());
+        registrationBean.addUrlPatterns("/*");
+        registrationBean.setName("bodyReaderFilter");
+        return registrationBean;
+    }
 
 }
 
