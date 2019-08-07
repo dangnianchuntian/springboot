@@ -24,5 +24,14 @@ public class ZhBootApplication {
         SpringApplication.run(ZhBootApplication.class, args);
     }
 
+//    @Bean
+//    public FilterRegistrationBean<BodyReaderFilter> Filters() {
+//        FilterRegistrationBean<BodyReaderFilter> registrationBean = new FilterRegistrationBean<BodyReaderFilter>();
+//        registrationBean.setFilter(new BodyReaderFilter());
+//        registrationBean.addUrlPatterns("/*");
+//        registrationBean.setName("bodyReaderFilter");
+//        return registrationBean;
+//    }
+
 }
 
