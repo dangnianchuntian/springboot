@@ -251,3 +251,25 @@
  
 
 * 博客地址：[BigDecimal 金额校验](https://zhanghan.blog.csdn.net/article/details/97649212 "别忘记点赞哦") 
+
+
+# 13.统一拦截器
+
+* 代码版本: 1.4.0-Release
+
+* 功能：统一日志拦截器
+
+* 包含模块：  
+    * InterceptController：拦截的控制器
+    * InterceptRequest：拦截的请求体
+    * InterceptLog：日志拦截器
+    * WebMvcConfig：容器中加载日志拦截器
+    * BodyReaderWrapper：请求体封装类
+    * BodyReaderFilter：过滤器
+          
+* 启动项目并验证
+    * 启动zh-boot
+    * 访问 http://localhost:8080/swagger-ui.html#/
+ 
+
+* 博客地址：[Required request body is missing](https://blog.csdn.net/zhanghan18333611647/article/details/98673078 "别忘记点赞哦") 
