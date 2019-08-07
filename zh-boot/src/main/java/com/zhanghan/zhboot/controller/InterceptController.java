@@ -30,7 +30,7 @@ public class InterceptController {
 
     @ApiOperation(value = "演示拦截", tags = {"演示拦截控制器"})
     @RequestMapping(value = "/intercept", method = RequestMethod.POST)
-    public Wrapper intercept(@Valid @RequestBody(required =false) InterceptRequest interceptRequest) {
+    public Wrapper intercept(@Valid @RequestBody InterceptRequest interceptRequest) {
         System.out.println(interceptRequest.toString());
         Map<String, Object> map = new HashMap();
         map.put("intLombok", interceptRequest.getIntLombok());
