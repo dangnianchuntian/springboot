@@ -17,6 +17,8 @@ import com.zhanghan.zhboot.util.wrapper.WrapMapper;
 import com.zhanghan.zhboot.util.wrapper.Wrapper;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -31,6 +33,8 @@ import java.util.Map;
 @Api(value = "校验手机号控制器",tags = {"校验手机号控制器"})
 public class CheckMobileController {
 
+    private static Logger logger = LoggerFactory.getLogger(CheckMobileController.class);
+
     @Autowired
     private MobilePreFixProperties mobilePreFixProperties;
 
@@ -38,10 +42,13 @@ public class CheckMobileController {
     @RequestMapping(value = "/good/check/mobile", method = RequestMethod.POST)
     public Wrapper goodCheckMobile(@RequestBody @Validated MobileCheckRequest mobileCheckRequest) {
 
+        logger.info("good check mobile param {}", mobileCheckRequest.toString());
+
         String countryCode = mobileCheckRequest.getCountryCode();
         String proFix = mobilePreFixProperties.getPrefixs().get(countryCode);
 
         if (StringUtils.isNullOrEmpty(proFix)) {
+            logger.error("good check mobile param is error; param is {}, profix is {}", mobileCheckRequest.toString(),proFix);
             return WrapMapper.error("参数错误");
         }
 
