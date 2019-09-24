@@ -30,7 +30,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
-@Api(value = "校验手机号控制器",tags = {"校验手机号控制器"})
+@Api(value = "校验手机号控制器", tags = {"校验手机号控制器"})
 public class CheckMobileController {
 
     private static Logger logger = LoggerFactory.getLogger(CheckMobileController.class);
@@ -38,7 +38,7 @@ public class CheckMobileController {
     @Autowired
     private MobilePreFixProperties mobilePreFixProperties;
 
-    @ApiOperation(value="优雅校验手机号格式方式",tags = {"校验手机号控制器"})
+    @ApiOperation(value = "优雅校验手机号格式方式", tags = {"校验手机号控制器"})
     @RequestMapping(value = "/good/check/mobile", method = RequestMethod.POST)
     public Wrapper goodCheckMobile(@RequestBody @Validated MobileCheckRequest mobileCheckRequest) {
 
@@ -48,7 +48,7 @@ public class CheckMobileController {
         String proFix = mobilePreFixProperties.getPrefixs().get(countryCode);
 
         if (StringUtils.isNullOrEmpty(proFix)) {
-            logger.error("good check mobile param is error; param is {}, profix is {}", mobileCheckRequest.toString(),proFix);
+            logger.error("good check mobile param is error; param is {}, profix is {}", mobileCheckRequest.toString(), proFix);
             return WrapMapper.error("参数错误");
         }
 
@@ -67,18 +67,21 @@ public class CheckMobileController {
         return WrapMapper.ok(map);
     }
 
-    @ApiOperation(value="扩展性差校验手机号格式方式",tags = {"校验手机号控制器"})
+    @ApiOperation(value = "扩展性差校验手机号格式方式", tags = {"校验手机号控制器"})
     @RequestMapping(value = "/bad/check/mobile", method = RequestMethod.POST)
     public Wrapper badCheckMobile(@RequestBody MobileCheckRequest mobileCheckRequest) {
 
+        logger.info("bad check mobile param {}", mobileCheckRequest.toString());
+
         String countryCode = mobileCheckRequest.getCountryCode();
 
-        String proFix;
+        String proFix = "";
         if (countryCode.equals("CN")) {
             proFix = "86";
         } else if (countryCode.equals("US")) {
             proFix = "1";
         } else {
+            logger.error("bad check mobile param is error; param is {}, profix is {}", mobileCheckRequest.toString(), proFix);
             return WrapMapper.error("参数错误");
         }
 
@@ -93,7 +96,7 @@ public class CheckMobileController {
         map.put("mobile", mobile);
         map.put("isLegal", isLegal);
         map.put("proFix", proFix);
-        return  WrapMapper.ok(map);
+        return WrapMapper.ok(map);
     }
 
 }
