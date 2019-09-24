@@ -79,10 +79,12 @@
             <artifactId>commons-fileupload</artifactId>
         </dependency>
 
+        <!-- spring boot admin begin -->
         <dependency>
             <groupId>de.codecentric</groupId>
             <artifactId>spring-boot-admin-client</artifactId>
         </dependency>
+        <!-- spring boot admin end -->
 
     </dependencies>
 
