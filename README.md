@@ -273,3 +273,25 @@
  
 
 * 博客地址：[Required request body is missing](https://blog.csdn.net/zhanghan18333611647/article/details/98673078 "别忘记点赞哦") 
+
+
+# 14.增加Spring Boot Admin监控 & 规范日志输出格式
+
+* 代码版本: 1.5.0-Release
+
+* 功能：增加Spring Boot Admin监控、规范日志输出格式
+
+* 包含模块：  
+    * zh-monitor项目：新增监控项目
+    * zh-boot项目: 增加SpringBootAdmin的client依赖，增加logback.xml规范日志输出格式
+          
+* 启动项目并验证
+    * 启动zh-boot
+    * 访问 http://localhost:8080/swagger-ui.html#/
+    * 启动zh-monitor
+    * 访问 http://localhost:8081
+
+* 博客地址：
+    * [logback 日志输出格式](https://zhanghan.blog.csdn.net/article/details/101269545 "别忘记点赞哦") 
+    * [SpringBoot实战（十二）:集成 Spring Boot Admin 监控](https://zhanghan.blog.csdn.net/article/details/101273915 "别忘记点赞哦") 
+    * [SpringBoot实战（十三）:Spring Boot Admin 动态修改日志级别](https://zhanghan.blog.csdn.net/article/details/101282082 "别忘记点赞哦") 
