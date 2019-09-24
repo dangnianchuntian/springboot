@@ -16,6 +16,8 @@ import com.zhanghan.zhboot.util.wrapper.WrapMapper;
 import com.zhanghan.zhboot.util.wrapper.Wrapper;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,12 +28,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class OrderController {
 
+    private static Logger logger = LoggerFactory.getLogger(OrderController.class);
+
     @Autowired
     private OrderService orderService;
 
     @ApiOperation(value = "多数据源获取订单方式", tags = {"演示多数据源控制器"})
     @RequestMapping(value = "/get/order/borrow", method = RequestMethod.POST)
     public Wrapper getOrderBorrow(@RequestBody OrderRequest orderRequest) {
+        logger.info("get order borrow param {}", orderRequest.toString());
         return WrapMapper.ok(orderService.findOrder(orderRequest));
     }
 }

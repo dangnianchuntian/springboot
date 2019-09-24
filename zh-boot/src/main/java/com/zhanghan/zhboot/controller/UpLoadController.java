@@ -16,6 +16,8 @@ import com.zhanghan.zhboot.util.wrapper.Wrapper;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -26,15 +28,19 @@ import org.springframework.web.multipart.MultipartFile;
 @Api(value = "演示文件上传控制器", tags = {"演示文件上传控制器"})
 public class UpLoadController {
 
+    private static Logger logger = LoggerFactory.getLogger(UpLoadController.class);
+
     @Value("${upload.path}")
     private String uploadPath;
 
     @ApiOperation(value = "演示文件上传", tags = {"演示文件上传控制器"})
     @PostMapping(value = "/upload", consumes = "multipart/form-data", headers = "Content-Type=multipart/form-data")
     public Wrapper upload( @ApiParam(value = "文件上传", required = true,type = "file") @RequestParam("img")MultipartFile img) {
+
         try {
             UploadUtil.saveLocal(img, uploadPath);
         } catch (Exception e) {
+            logger.error("upload exception {}",e.getMessage());
             return WrapMapper.error();
         }
         return WrapMapper.ok();

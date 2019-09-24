@@ -15,6 +15,8 @@ import com.zhanghan.zhboot.util.wrapper.WrapMapper;
 import com.zhanghan.zhboot.util.wrapper.Wrapper;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -28,10 +30,14 @@ import java.util.Map;
 @Api(value = "演示拦截控制器", tags = {"演示拦截控制器"})
 public class InterceptController {
 
+    private static Logger logger = LoggerFactory.getLogger(InterceptController.class);
+
     @ApiOperation(value = "演示拦截", tags = {"演示拦截控制器"})
     @RequestMapping(value = "/intercept", method = RequestMethod.POST)
     public Wrapper intercept(@Valid @RequestBody InterceptRequest interceptRequest) {
-        System.out.println(interceptRequest.toString());
+
+        logger.info("intercept param {}", interceptRequest.toString());
+
         Map<String, Object> map = new HashMap();
         map.put("intLombok", interceptRequest.getIntLombok());
         map.put("strLombok", interceptRequest.getStrLombok());

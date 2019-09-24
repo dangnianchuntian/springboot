@@ -15,6 +15,8 @@ import com.zhanghan.zhboot.util.wrapper.WrapMapper;
 import com.zhanghan.zhboot.util.wrapper.Wrapper;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.redis.connection.RedisConnection;
@@ -32,6 +34,8 @@ import java.util.Map;
 @RestController
 public class RedisController {
 
+    private static Logger logger = LoggerFactory.getLogger(RedisController.class);
+
     @Autowired
     private RedisTemplate<String, String> strRedisTemplate;
     @Autowired
@@ -48,16 +52,19 @@ public class RedisController {
 
         String strRedisValue = strRedisTemplate.opsForValue().get(strRedisKey);
         if (StringUtils.isNullOrEmpty(strRedisValue)) {
+            logger.info("get redis strRedisValue is empty;strRedisKey {}", strRedisKey);
             strRedisTemplate.opsForValue().set(strRedisKey, "张晗");
         }
 
         Long longRedisValue = longRedisTemplate.opsForValue().get(longRedisKey);
         if (ObjectUtils.isEmpty(longRedisValue)) {
+            logger.info("get redis longRedisValue is empty;longRedisKey {}", longRedisKey);
             longRedisTemplate.opsForValue().set(longRedisKey, 1L);
         }
 
         Boolean booleanRedisValue = booleanRedisTemplate.opsForValue().get(booleanRedisKey);
         if (ObjectUtils.isEmpty(booleanRedisValue)) {
+            logger.info("get redis booleanRedisValue is empty;booleanRedisKey {}", booleanRedisKey);
             booleanRedisTemplate.opsForValue().set(booleanRedisKey, true);
         }
 

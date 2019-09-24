@@ -16,6 +16,8 @@ import com.zhanghan.zhboot.util.wrapper.WrapMapper;
 import com.zhanghan.zhboot.util.wrapper.Wrapper;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -29,9 +31,13 @@ import java.util.Map;
 @Api(value = "演示校验金额控制器", tags = {"演示校验金额控制器"})
 public class CheckMoneyController {
 
+    private static Logger logger = LoggerFactory.getLogger(CheckMoneyController.class);
+
     @ApiOperation(value = "演示金额校验", tags = {"演示校验金额控制器"})
     @RequestMapping(value = "/check/money", method = RequestMethod.POST)
     public Wrapper lombok(@RequestBody CheckMoneyRequest checkMoneyRequest) {
+
+        logger.info("check money param {}", checkMoneyRequest.toString());
 
         BigDecimal money = checkMoneyRequest.getMoney();
 

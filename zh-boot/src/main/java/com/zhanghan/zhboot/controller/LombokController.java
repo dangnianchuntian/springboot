@@ -15,6 +15,8 @@ import com.zhanghan.zhboot.util.wrapper.WrapMapper;
 import com.zhanghan.zhboot.util.wrapper.Wrapper;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -27,10 +29,14 @@ import java.util.Map;
 @Api(value = "演示Lombok控制器",tags = {"演示Lombok控制器"})
 public class LombokController {
 
+    private static Logger logger = LoggerFactory.getLogger(LombokController.class);
+
     @ApiOperation(value="演示Lombok",tags = {"演示Lombok控制器"})
     @RequestMapping(value = "/lombok", method = RequestMethod.POST)
     public Wrapper lombok(@RequestBody LombokRequest lombokRequest) {
-        System.out.println(lombokRequest.toString());
+
+        logger.info("lombok param {}", lombokRequest.toString());
+
         Map<String, Object> map = new HashMap();
         map.put("intLombok", lombokRequest.getIntLombok());
         map.put("strLombok", lombokRequest.getStrLombok());
