@@ -295,3 +295,24 @@
     * [logback 日志输出格式](https://zhanghan.blog.csdn.net/article/details/101269545 "别忘记点赞哦") 
     * [SpringBoot实战（十二）:集成 Spring Boot Admin 监控](https://zhanghan.blog.csdn.net/article/details/101273915 "别忘记点赞哦") 
     * [SpringBoot实战（十三）:Spring Boot Admin 动态修改日志级别](https://zhanghan.blog.csdn.net/article/details/101282082 "别忘记点赞哦") 
+
+
+# 15.集成安全和告警模块
+
+* 代码版本: 1.6.0-Release
+
+* 功能：增加Spring Boot Admin安全认证以及告警
+
+* 包含模块：  
+    * zh-monitor项目：安全认证告警
+    * zh-boot项目: 增加安全认证配置
+          
+* 启动项目并验证
+    * 启动zh-boot
+    * 访问 http://localhost:8080/swagger-ui.html#/
+    * 启动zh-monitor
+    * 访问 http://localhost:8081
+
+* 博客地址：
+    * [SpringBoot实战（十四）:Spring Boot Admin 集成安全模块](https://zhanghan.blog.csdn.net/article/details/101595226 "别忘记点赞哦") 
+    * [SpringBoot实战（十五）:Spring Boot Admin 集成告警模块](https://zhanghan.blog.csdn.net/article/details/101597346 "别忘记点赞哦")     
