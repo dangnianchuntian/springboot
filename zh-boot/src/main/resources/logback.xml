@@ -6,6 +6,12 @@
 	FILEWARN对应warn级别，文件名以log-warn-xxx.log形式命名 FILEINFO对应info级别，文件名以log-info-xxx.log形式命名
 	FILEDEBUG对应debug级别，文件名以log-debug-xxx.log形式命名 stdout将日志信息输出到控制上，为方便开发测试使用 -->
 <configuration>
+
+    <!-- logstash相关属性 -->
+    <springProperty scope="context" name="springAppName" source="spring.application.name"/>
+    <springProperty scope="context" name="logstashPath" source="logstash.path"/>
+    <property name="LOGSTASH_LOG_FILE" value="${logstashPath}/${springAppName}.json"/>
+
     <springProperty scope="context" name="LOG_HOME" source="spring.application.name"/>
 
     <springProfile name="local">
@@ -76,6 +82,56 @@
             <onMismatch>DENY</onMismatch>
         </filter>
     </appender>
+
+    <appender name="logstashInfoLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!-- 此日志文件只记录info级别的 -->
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>INFO</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <!-- 正在记录的日志文件的路径及文件名 -->
+        <file>${LOGSTASH_LOG_FILE}</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOGSTASH_LOG_FILE}.%d{yyyy-MM-dd}.gz</fileNamePattern>
+        </rollingPolicy>
+        <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+            <providers>
+                <timestamp>
+                    <timeZone>UTC</timeZone>
+                </timestamp>
+                <pattern>
+                    <pattern>
+                        {
+                        "esindex":"zh-boot-allrequest-log",
+                        "severity": "%level",
+                        "service": "${springAppName:-}",
+                        "trace": "%X{X-B3-TraceId:-}",
+                        "span": "%X{X-B3-SpanId:-}",
+                        "parent": "%X{X-B3-ParentSpanId:-}",
+                        "exportable": "%X{X-Span-Export:-}",
+                        "pid": "${PID:-}",
+                        "thread": "%thread",
+                        "class": "%logger{40}",
+                        "message": "%message",
+                        "applicationName" : "%X{applicationName}",
+                        "requestURI" : "%X{requestURI}",
+                        "sourceName" : "%X{sourceName}",
+                        "requestParams" : "%X{requestParams}",
+                        "requestTime" : "%X{requestTime}"
+                        }
+                    </pattern>
+                </pattern>
+            </providers>
+        </encoder>
+    </appender>
+
+    <!--日志生效开始位置-->
+    <logger name="logstashInfo" additivity="false">
+        <appender-ref ref="logstashInfoLog"/>
+    </logger>
+
+
     <!--    <appender name="rollingFileSql" class="ch.qos.logback.core.rolling.RollingFileAppender">-->
     <!--        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">-->
     <!--            <fileNamePattern>${LOG_PATH}/${appName}-log-sql-%d{yyyy-MM-dd}.%i.log.zip</fileNamePattern>-->
