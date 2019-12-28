@@ -105,7 +105,7 @@ public class FileBeatLogUtil {
     public static String getStringTodayTime() {
         Date todat_date = new Date();
         //将日期格式化
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
         //转换成字符串格式
         return simpleDateFormat.format(todat_date);
     }
