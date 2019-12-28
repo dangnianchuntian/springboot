@@ -117,8 +117,10 @@
                         "applicationName" : "%X{applicationName}",
                         "requestURI" : "%X{requestURI}",
                         "sourceName" : "%X{sourceName}",
-                        "requestParams" : "%X{requestParams}",
-                        "requestTime" : "%X{requestTime}"
+                        "httpUUID" : "%X{httpUUID}",
+                        "httpType" : "%X{httpType}",
+                        "httpParams" : "%X{httpParams}",
+                        "httpTime" : "%X{httpTime}"
                         }
                     </pattern>
                 </pattern>
