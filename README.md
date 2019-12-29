@@ -315,4 +315,20 @@
 
 * 博客地址：
     * [SpringBoot实战（十四）:Spring Boot Admin 集成安全模块](https://zhanghan.blog.csdn.net/article/details/101595226 "别忘记点赞哦") 
-    * [SpringBoot实战（十五）:Spring Boot Admin 集成告警模块](https://zhanghan.blog.csdn.net/article/details/101597346 "别忘记点赞哦")     
+    * [SpringBoot实战（十五）:Spring Boot Admin 集成告警模块](https://zhanghan.blog.csdn.net/article/details/101597346 "别忘记点赞哦")  
+
+# 16.集成日志收集系统
+
+* 代码版本: 1.7.0-Release
+
+* 功能：增加request及response日志拦截
+
+* 包含模块：      
+    * zh-boot项目: 增加请求与响应的日志拦截
+          
+* 启动项目并验证
+    * 启动zh-boot
+    * 访问 http://localhost:8080/swagger-ui.html#/    
+
+* 博客地址：
+    * [从零学ELK系列](https://blog.csdn.net/u012829124/category_9628434.html "别忘记点赞哦") 
