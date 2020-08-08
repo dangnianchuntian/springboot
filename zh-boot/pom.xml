@@ -101,9 +101,6 @@
             <artifactId>logstash-logback-encoder</artifactId>
         </dependency>
 
-
-
-
     </dependencies>
 
     <build>

@@ -1,0 +1,47 @@
+/*
+ * Copyright (c) 2020. zhanghan_java@163.com All Rights Reserved.
+ * 项目名称：Spring Boot实战解决高并发数据入库: Redis 缓存+MySQL 批量入库
+ * 类名称：RedisConfig.java
+ * 创建人：张晗
+ * 联系方式：zhanghan_java@163.com
+ * 开源地址: https://github.com/dangnianchuntian/springboot
+ * 博客地址: https://zhanghan.blog.csdn.net
+ */
+
+package com.zhanghan.zhredistodb.mybatis.entity;
+
+import java.util.Date;
+
+import lombok.Data;
+
+@Data
+public class XArticleCountEntity {
+    private Long id;
+
+    private String buNo;
+
+    private String customerId;
+
+    private Integer type;
+
+    private String articleNo;
+
+    private Date readTime;
+
+    private Date createTime;
+
+    private Date updateTime;
+
+    private Integer param1;
+
+    private Integer param2;
+
+    private Integer param3;
+
+    private String param4;
+
+    private String param5;
+
+    private String param6;
+
+}
