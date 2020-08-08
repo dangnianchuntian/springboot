@@ -16,6 +16,13 @@
     <name>zh-parent</name>
     <description>zhanghan for Spring Boot</description>
 
+    <modules>
+        <module>zh-boot</module>
+        <module>zh-monitor</module>
+        <module>zh-redis-to-db</module>
+        <module>zh-nearby-people</module>
+    </modules>
+
     <properties>
         <java.version>1.8</java.version>
         <spring-cloud.version>Greenwich.RC2</spring-cloud.version>
@@ -130,12 +137,6 @@
 
         </dependencies>
     </dependencyManagement>
-
-    <modules>
-        <module>zh-boot</module>
-        <module>zh-monitor</module>
-        <module>zh-redis-to-db</module>
-    </modules>
 
     <build>
         <plugins>
