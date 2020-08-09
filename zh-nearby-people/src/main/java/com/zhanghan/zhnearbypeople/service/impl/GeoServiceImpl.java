@@ -52,7 +52,7 @@ public class GeoServiceImpl implements GeoService {
     public Object postGeo(PostGeoRequest postGeoRequest) {
 
         Long flag = objRedisTemplate.opsForGeo().add(zhGeoRedisKey, new RedisGeoCommands.GeoLocation<>(postGeoRequest
-                .getCustomerId(), new Point(postGeoRequest.getLongitude(), postGeoRequest.getLatitude())));
+                .getCustomerId(), new Point(postGeoRequest.getLatitude(), postGeoRequest.getLongitude())));
 
         if (null != flag && flag > 0) {
             return WrapMapper.ok();
@@ -78,7 +78,7 @@ public class GeoServiceImpl implements GeoService {
             List<String> scriptParams = new ArrayList<>();
             scriptParams.add(zhGeoRedisKey);
             scriptParams.add(customerId);
-            scriptParams.add("10");
+            scriptParams.add("100");
             scriptParams.add(RedisGeoCommands.DistanceUnit.KILOMETERS.getAbbreviation());
             scriptParams.add("asc");
             scriptParams.add("storedist");
@@ -91,22 +91,25 @@ public class GeoServiceImpl implements GeoService {
             }
 
             //zset集合中去除自己
-            Long remove = objRedisTemplate.opsForZSet().remove(strZsetUserKey, 0, 0);
+            Long remove = objRedisTemplate.opsForZSet().remove(strZsetUserKey, customerId);
 
         }
 
-        nearByPeopleDtoList = listNearByPeopleFromZset(strZsetUserKey, listNearByPeopleRequest);
+        nearByPeopleDtoList = listNearByPeopleFromZset(strZsetUserKey, listNearByPeopleRequest.getPageIndex(),
+                listNearByPeopleRequest.getPageSize());
 
         return WrapMapper.ok(nearByPeopleDtoList);
 
     }
 
-    private List<NearByPeopleDto> listNearByPeopleFromZset(String strZsetUserKey, ListNearByPeopleRequest
-            listNearByPeopleRequest) {
+    private List<NearByPeopleDto> listNearByPeopleFromZset(String strZsetUserKey, Integer pageIndex, Integer pageSize) {
+
+        Integer startPage = (pageIndex - 1) * pageSize;
+        Integer endPage = pageIndex * pageSize - 1;
         List<NearByPeopleDto> nearByPeopleDtoList = new ArrayList<>();
         Set<ZSetOperations.TypedTuple<Object>> zsetUsers = objRedisTemplate.opsForZSet()
-                .rangeWithScores(strZsetUserKey, listNearByPeopleRequest.getPageIndex(),
-                        listNearByPeopleRequest.getPageSize());
+                .rangeWithScores(strZsetUserKey, startPage,
+                        endPage);
 
         for (ZSetOperations.TypedTuple<Object> zsetUser : zsetUsers) {
             NearByPeopleDto nearByPeopleDto = new NearByPeopleDto();

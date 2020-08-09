@@ -39,7 +39,7 @@ public class GeoController {
      */
 
     @RequestMapping(value = "/list/nearby/people", method = RequestMethod.POST)
-    public Object listNearByPeople(ListNearByPeopleRequest listNearByPeopleRequest) {
+    public Object listNearByPeople(@RequestBody @Validated ListNearByPeopleRequest listNearByPeopleRequest) {
         return articleCountService.listNearByPeople(listNearByPeopleRequest);
     }
 

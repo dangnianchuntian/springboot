@@ -10,7 +10,6 @@
 
 package com.zhanghan.zhnearbypeople.controller.request;
 
-
 import com.sun.istack.internal.NotNull;
 
 import lombok.Data;
@@ -20,12 +19,15 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class PostGeoRequest {
 
+    //用户编码
     @NotNull
     private String customerId;
 
+    //维度
     @NotNull
     private double longitude;
 
+    //经度
     @NotNull
     private double latitude;
 

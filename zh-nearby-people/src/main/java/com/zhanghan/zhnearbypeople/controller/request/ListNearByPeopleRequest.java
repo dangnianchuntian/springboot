@@ -13,8 +13,10 @@ package com.zhanghan.zhnearbypeople.controller.request;
 import com.sun.istack.internal.NotNull;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
 public class ListNearByPeopleRequest {
 
     @NotNull
