@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2020. zhanghan_java@163.com All Rights Reserved.
- * 项目名称：Spring Boot实战解决高并发数据入库: Redis 缓存+MySQL 批量入库
- * 类名称：RedisConfig.java
+ * 项目名称：Spring Boot实战分页查询附近的人: Redis+GeoHash+Lua
+ * 类名称：NearByPeopleDto.java
  * 创建人：张晗
  * 联系方式：zhanghan_java@163.com
  * 开源地址: https://github.com/dangnianchuntian/springboot
