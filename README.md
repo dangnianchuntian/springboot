@@ -333,7 +333,7 @@
 * 博客地址：
     * [从零学ELK系列](https://blog.csdn.net/u012829124/category_9628434.html "别忘记点赞哦") 
     
-# 17.集成日志收集系统
+# 17.Spring Boot实战解决高并发数据入库: Redis 缓存+MySQL 批量入库
 
 * 代码版本: 1.8.0-Release
 
@@ -350,4 +350,23 @@
     * 启动zh-redis-to-db    
 
 * 博客地址：
-    * [Spring Boot实战解决高并发数据入库: Redis 缓存+MySQL 批量入库](https://zhanghan.blog.csdn.net/article/details/107878941 "别忘记点赞哦")     
+    * [Spring Boot实战解决高并发数据入库: Redis 缓存+MySQL 批量入库](https://zhanghan.blog.csdn.net/article/details/107878941 "别忘记点赞哦")
+
+
+# 17.Spring Boot实战分页查询附近的人: Redis+GeoHash+Lua
+
+* 代码版本: 1.9.0-Release
+
+* 功能：
+    * 记录地理位置
+    * 分页查询附近的人
+    
+* 技术栈：  
+    * SpringBoot
+    * Redis(version>=3.2)
+          
+* 启动项目并验证
+    * 启动zh-nearby-people    
+
+* 博客地址：
+    * [Spring Boot实战分页查询附近的人: Redis+GeoHash+Lua](https://blog.csdn.net/zhanghan18333611647/article/details/107897938 "别忘记点赞哦")
