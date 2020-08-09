@@ -17,29 +17,30 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.zhanghan.zhnearbypeople.controller.request.PostArticleViewsRequest;
-import com.zhanghan.zhnearbypeople.service.ArticleCountService;
+import com.zhanghan.zhnearbypeople.controller.request.ListNearByPeopleRequest;
+import com.zhanghan.zhnearbypeople.controller.request.PostGeoRequest;
+import com.zhanghan.zhnearbypeople.service.GeoService;
 
 @RestController
-public class ArticleCountController {
+public class GeoController {
 
     @Autowired
-    private ArticleCountService articleCountService;
+    private GeoService articleCountService;
 
    /**
     * 记录用户访问记录
     */
-    @RequestMapping(value = "/post/article/views", method = RequestMethod.POST)
-    public Object postArticleViews(@RequestBody @Validated PostArticleViewsRequest postArticleViewsRequest) {
-        return articleCountService.postArticleViews(postArticleViewsRequest);
+    @RequestMapping(value = "/post/geo", method = RequestMethod.POST)
+    public Object postGeo(@RequestBody @Validated PostGeoRequest postGeoRequest) {
+        return articleCountService.postGeo(postGeoRequest);
     }
     /**
      *  批量将缓存中的数据同步到MySQL（模拟定时任务操作）
      */
 
-    @RequestMapping(value = "/post/batch", method = RequestMethod.POST)
-    public Object postBatch() {
-        return articleCountService.postBatchRedisToDb();
+    @RequestMapping(value = "/list/nearby/people", method = RequestMethod.POST)
+    public Object listNearByPeople(ListNearByPeopleRequest listNearByPeopleRequest) {
+        return articleCountService.listNearByPeople(listNearByPeopleRequest);
     }
 
 }

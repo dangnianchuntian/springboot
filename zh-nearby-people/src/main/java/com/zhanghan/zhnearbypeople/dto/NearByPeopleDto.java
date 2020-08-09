@@ -10,19 +10,13 @@
 
 package com.zhanghan.zhnearbypeople.dto;
 
-import java.util.Date;
-
 import lombok.Data;
 
 @Data
-public class ArticleCountDto {
-
-    private String buNo;
+public class NearByPeopleDto {
 
     private String customerId;
 
-    private String articleNo;
-
-    private Date readTime;
+    private Double distance;
 
 }

@@ -10,24 +10,20 @@
 
 package com.zhanghan.zhnearbypeople.controller.request;
 
-
 import com.sun.istack.internal.NotNull;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+
 import lombok.Data;
 
-@ApiModel("文章统计")
 @Data
-public class PostArticleViewsRequest {
+public class ListNearByPeopleRequest {
 
-    @ApiModelProperty(value = "用户编码")
     @NotNull
     private String customerId;
 
-    @ApiModelProperty(value = "文章编码")
     @NotNull
-    private String articleNo;
+    private Integer pageIndex;
 
-    public PostArticleViewsRequest() {
-    }
+    @NotNull
+    private Integer pageSize;
+
 }

@@ -46,7 +46,7 @@ public class ArticleCountServiceImpl implements ArticleCountService {
     @Value("${zh.article.count.redis.key:zh}")
     private String zhArticleCountRedisKey;
 
-    @Value("#{T(java.lang.Integer).parseInt('${zh..article.read.num:3}')}")
+    @Value("#{T(java.lang.Integer).parseInt('${zh.article.read.num:3}')}")
     private Integer articleReadNum;
 
     /**

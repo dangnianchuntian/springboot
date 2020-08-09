@@ -8,16 +8,17 @@
  * 博客地址: https://zhanghan.blog.csdn.net
  */
 
-package com.zhanghan.zhnearbypeople.service;
+package com.zhanghan.zhnearbypeople.controller.response;
 
+import java.util.List;
 
-import com.zhanghan.zhnearbypeople.controller.request.PostArticleViewsRequest;
+import com.zhanghan.zhnearbypeople.dto.NearByPeopleDto;
 
-public interface ArticleCountService {
+import lombok.Data;
 
+@Data
+public class ListNearByPeopleResponse {
 
-    Object postArticleViews(PostArticleViewsRequest postArticleViewsRequest);
-
-    Object postBatchRedisToDb();
+    private List<NearByPeopleDto> nearByPeopleDtoList;
 
 }
