@@ -4,7 +4,7 @@
  * 类名称：RedisLuaUtil.java
  * 创建人：张晗
  * 联系方式：zhanghan_java@163.com
- * 开源地址: https://github.com/dangnianchuntian/redis-to-db
+ * 开源地址: https://github.com/dangnianchuntian/springboot
  * 博客地址: https://zhanghan.blog.csdn.net
  */
 

@@ -25,22 +25,22 @@ import com.zhanghan.zhnearbypeople.service.GeoService;
 public class GeoController {
 
     @Autowired
-    private GeoService articleCountService;
+    private GeoService geoService;
 
-   /**
-    * 记录用户访问记录
-    */
+    /**
+     * 记录用户地理位置
+     */
     @RequestMapping(value = "/post/geo", method = RequestMethod.POST)
     public Object postGeo(@RequestBody @Validated PostGeoRequest postGeoRequest) {
-        return articleCountService.postGeo(postGeoRequest);
+        return geoService.postGeo(postGeoRequest);
     }
-    /**
-     *  批量将缓存中的数据同步到MySQL（模拟定时任务操作）
-     */
 
+    /**
+     * 分页查询当前用户附近的人
+     */
     @RequestMapping(value = "/list/nearby/people", method = RequestMethod.POST)
     public Object listNearByPeople(@RequestBody @Validated ListNearByPeopleRequest listNearByPeopleRequest) {
-        return articleCountService.listNearByPeople(listNearByPeopleRequest);
+        return geoService.listNearByPeople(listNearByPeopleRequest);
     }
 
 }

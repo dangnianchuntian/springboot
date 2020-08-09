@@ -39,10 +39,10 @@ public class GeoServiceImpl implements GeoService {
     @Autowired
     private RedisTemplate<String, Object> objRedisTemplate;
 
-    @Value("${zh.geo.redis.key:zh:geo}")
+    @Value("${zh.geo.redis.key:zhgeo}")
     private String zhGeoRedisKey;
 
-    @Value("${zh.geo.zset.redis.key:zh:geo:zset:}")
+    @Value("${zh.geo.zset.redis.key:zhgeozset:}")
     private String zhGeoZsetRedisKey;
 
     /**
@@ -51,6 +51,7 @@ public class GeoServiceImpl implements GeoService {
     @Override
     public Object postGeo(PostGeoRequest postGeoRequest) {
 
+        //对应redis原生命令:GEOADD zhgeo 116.48105 39.996794 zhangsan
         Long flag = objRedisTemplate.opsForGeo().add(zhGeoRedisKey, new RedisGeoCommands.GeoLocation<>(postGeoRequest
                 .getCustomerId(), new Point(postGeoRequest.getLatitude(), postGeoRequest.getLongitude())));
 
@@ -84,6 +85,8 @@ public class GeoServiceImpl implements GeoService {
             scriptParams.add("storedist");
             scriptParams.add(strZsetUserKey);
 
+            //用Lua脚本实现georadiusbymember中的storedist参数
+            //对应Redis原生命令:georadiusbymember zhgeo sunliu 100 km asc count 5 storedist sunliu
             Long executeResult = objRedisTemplate.execute(RedisLuaUtil.GEO_RADIUS_STOREDIST_SCRIPT(), scriptParams);
 
             if (null == executeResult || executeResult < 1) {
@@ -91,6 +94,7 @@ public class GeoServiceImpl implements GeoService {
             }
 
             //zset集合中去除自己
+            //对应Redis原生命令:zrem sunliu sunliu
             Long remove = objRedisTemplate.opsForZSet().remove(strZsetUserKey, customerId);
 
         }
@@ -102,11 +106,15 @@ public class GeoServiceImpl implements GeoService {
 
     }
 
+    /**
+     * 分页从zset中查询指定用户附近的人
+     */
     private List<NearByPeopleDto> listNearByPeopleFromZset(String strZsetUserKey, Integer pageIndex, Integer pageSize) {
 
         Integer startPage = (pageIndex - 1) * pageSize;
         Integer endPage = pageIndex * pageSize - 1;
         List<NearByPeopleDto> nearByPeopleDtoList = new ArrayList<>();
+        //对应Redis原生命令:zrange key 0 2 withscores
         Set<ZSetOperations.TypedTuple<Object>> zsetUsers = objRedisTemplate.opsForZSet()
                 .rangeWithScores(strZsetUserKey, startPage,
                         endPage);
