@@ -353,7 +353,7 @@
     * [Spring Boot实战解决高并发数据入库: Redis 缓存+MySQL 批量入库](https://zhanghan.blog.csdn.net/article/details/107878941 "别忘记点赞哦")
 
 
-# 17.Spring Boot实战分页查询附近的人: Redis+GeoHash+Lua
+# 18.Spring Boot实战分页查询附近的人: Redis+GeoHash+Lua
 
 * 代码版本: 1.9.0-Release
 
