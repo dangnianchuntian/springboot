@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2020. zhanghan_java@163.com All Rights Reserved.
- * 项目名称：Spring Boot实战解决高并发数据入库: Redis 缓存+MySQL 批量入库
- * 类名称：ArticleCountServiceImpl.java
+ * 项目名称：Spring Boot实战:签到奖励实现方案
+ * 类名称：SignInServiceImpl.java
  * 创建人：张晗
  * 联系方式：zhanghan_java@163.com
  * 开源地址: https://github.com/dangnianchuntian/springboot
@@ -10,7 +10,7 @@
 
 package com.zhanghan.zhsignin.service.impl;
 
-import cn.hutool.core.lang.UUID;
+import cn.hutool.core.util.IdUtil;
 import com.zhanghan.zhsignin.config.SignInRewardMoneyListConfig;
 import com.zhanghan.zhsignin.constant.SignInConstant;
 import com.zhanghan.zhsignin.controller.request.ListSignInDetailRequest;
@@ -52,7 +52,6 @@ public class SignInServiceImpl implements SignInService {
     @Autowired
     public SignInRewardMoneyListConfig signInRewardMoneyListConfig;
 
-    private static Long todayDateTime = DateUtils.getYesterdayDate().getTime();
 
     /**
      * 查询用户签到记录
@@ -77,17 +76,16 @@ public class SignInServiceImpl implements SignInService {
         }
 
         long signInDateTime = xZhSignInEntity.getSignInDate().getTime();
-        long yesterdayDateTime = DateUtils.getYesterdayDate().getTime();
 
         //最近一次签到是否为昨日之前
-        if (signInDateTime < yesterdayDateTime) {
+        if (signInDateTime < DateUtils.getYesterdayDateTime()) {
             return WrapMapper.ok(new ListSignInDetailResponse(TODAY_NOT_SIGN_IN, SignInConstant.CONTINUITE_DAY_ZERO, signInDetailList));
         }
 
         //最近一次签到是否为昨日
         Integer todaySignStatus = TODAY_YES_SIGN_IN;
         Integer continuiteDay = xZhSignInEntity.getContinuiteDay();
-        if (signInDateTime < todayDateTime) {
+        if (signInDateTime < DateUtils.getTodayDateTime()) {
             //最近一次签到是昨日且之前已连续签到7日
             if (continuiteDay >= continuiteDayThreshold) {
                 return WrapMapper.ok(new ListSignInDetailResponse(TODAY_NOT_SIGN_IN, SignInConstant.CONTINUITE_DAY_ZERO, signInDetailList));
@@ -125,7 +123,7 @@ public class SignInServiceImpl implements SignInService {
         //签到记录是否为空
         if (null == xZhSignInEntityByCustomerId) {
             XZhSignInEntity xZhSignInEntity = new XZhSignInEntity();
-            xZhSignInEntity.setBuNo(UUID.randomUUID().toString());
+            xZhSignInEntity.setBuNo(IdUtil.simpleUUID());
             xZhSignInEntity.setCustomerId(customerId);
             xZhSignInEntity.setContinuiteDay(CONTINUITE_DAY_ONE);
             xZhSignInEntity.setRewardMoney(signInRewardMoneyListConfigList.get(0));
@@ -135,7 +133,7 @@ public class SignInServiceImpl implements SignInService {
         }
 
         long signInDateTime = xZhSignInEntityByCustomerId.getSignInDate().getTime();
-        if (signInDateTime == todayDateTime) {
+        if (signInDateTime == DateUtils.getTodayDateTime()) {
             return WrapMapper.error("今天已经签到");
         }
 
@@ -145,7 +143,7 @@ public class SignInServiceImpl implements SignInService {
         xZhSignInEntityByCustomerId.setContinuiteDay(continuiteDay);
         xZhSignInEntityByCustomerId.setRewardMoney(signInRewardMoneyListConfigList.get(continuiteDay - 1));
         xZhSignInEntityByCustomerId.setUpdateTime(new Date());
-        xZhSignInEntityByCustomerId.setBuNo(UUID.randomUUID().toString());
+        xZhSignInEntityByCustomerId.setBuNo(IdUtil.simpleUUID());
         updateSignInAndInsertHist(xZhSignInEntityByCustomerId);
 
         return WrapMapper.ok();
@@ -153,7 +151,7 @@ public class SignInServiceImpl implements SignInService {
     }
 
     private Integer continuiteDay(Integer continuiteDay, Long signInDateTime) {
-        if (signInDateTime < todayDateTime) {
+        if (signInDateTime < DateUtils.getYesterdayDateTime()) {
             return CONTINUITE_DAY_ONE;
         }
         if (continuiteDay >= continuiteDayThreshold) {
