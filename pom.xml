@@ -21,6 +21,7 @@
         <module>zh-monitor</module>
         <module>zh-redis-to-db</module>
         <module>zh-nearby-people</module>
+        <module>zh-sign-in</module>
     </modules>
 
     <properties>
