@@ -1,6 +1,6 @@
 /*
  * Copyright (c) 2020. zhanghan_java@163.com All Rights Reserved.
- * 项目名称：Spring Boot实战解决高并发数据入库: Redis 缓存+MySQL 批量入库
+ * 项目名称：Spring Boot实战:Redis批量操作轻松实现百倍性能提升
  * 类名称：Wrapper.java
  * 创建人：张晗
  * 联系方式：zhanghan_java@163.com
@@ -10,12 +10,11 @@
 
 package com.zhanghan.zhredisbatch.util.wrapper;
 
-import java.io.Serializable;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-
 import lombok.Data;
+
+import java.io.Serializable;
 
 
 /**

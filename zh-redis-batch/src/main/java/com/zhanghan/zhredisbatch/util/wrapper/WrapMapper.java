@@ -1,6 +1,6 @@
 /*
  * Copyright (c) 2020. zhanghan_java@163.com All Rights Reserved.
- * 项目名称：Spring Boot实战解决高并发数据入库: Redis 缓存+MySQL 批量入库
+ * 项目名称：Spring Boot实战:Redis批量操作轻松实现百倍性能提升
  * 类名称：WrapMapper.java
  * 创建人：张晗
  * 联系方式：zhanghan_java@163.com
@@ -32,7 +32,6 @@ public class WrapMapper {
      * @param code    the code
      * @param message the message
      * @param o       the o
-     *
      * @return the wrapper
      */
     public static <E> Wrapper<E> wrap(int code, String message, E o) {
@@ -45,7 +44,6 @@ public class WrapMapper {
      * @param <E>     the element type
      * @param code    the code
      * @param message the message
-     *
      * @return the wrapper
      */
     public static <E> Wrapper<E> wrap(int code, String message) {
@@ -57,7 +55,6 @@ public class WrapMapper {
      *
      * @param <E>  the element type
      * @param code the code
-     *
      * @return the wrapper
      */
     public static <E> Wrapper<E> wrap(int code) {
@@ -69,7 +66,6 @@ public class WrapMapper {
      *
      * @param <E> the element type
      * @param e   the e
-     *
      * @return the wrapper
      */
     public static <E> Wrapper<E> wrap(Exception e) {
@@ -81,7 +77,6 @@ public class WrapMapper {
      *
      * @param <E>     the element type
      * @param wrapper the wrapper
-     *
      * @return the e
      */
     public static <E> E unWrap(Wrapper<E> wrapper) {
@@ -92,7 +87,6 @@ public class WrapMapper {
      * Wrap ERROR. code=1
      *
      * @param <E> the element type
-     *
      * @return the wrapper
      */
     public static <E> Wrapper<E> error() {
@@ -104,7 +98,6 @@ public class WrapMapper {
      *
      * @param <E>     the type parameter
      * @param message the message
-     *
      * @return the wrapper
      */
     public static <E> Wrapper<E> error(String message) {
@@ -115,7 +108,6 @@ public class WrapMapper {
      * Wrap SUCCESS. code=0
      *
      * @param <E> the element type
-     *
      * @return the wrapper
      */
     public static <E> Wrapper<E> ok() {
@@ -127,7 +119,6 @@ public class WrapMapper {
      *
      * @param <E> the type parameter
      * @param o   the o
-     *
      * @return the wrapper
      */
     public static <E> Wrapper<E> ok(E o) {

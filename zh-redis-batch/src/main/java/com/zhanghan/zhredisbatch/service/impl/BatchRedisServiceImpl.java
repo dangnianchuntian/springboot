@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2020. zhanghan_java@163.com All Rights Reserved.
- * 项目名称：Spring Boot实战解决高并发数据入库: Redis 缓存+MySQL 批量入库
- * 类名称：ArticleCountServiceImpl.java
+ * 项目名称：Spring Boot实战:Redis批量操作轻松实现百倍性能提升
+ * 类名称：BatchRedisServiceImpl.java
  * 创建人：张晗
  * 联系方式：zhanghan_java@163.com
  * 开源地址: https://github.com/dangnianchuntian/springboot
@@ -11,6 +11,7 @@
 package com.zhanghan.zhredisbatch.service.impl;
 
 import com.zhanghan.zhredisbatch.controller.request.ListMultiGetRequest;
+import com.zhanghan.zhredisbatch.controller.request.PostMultiDeleteRequest;
 import com.zhanghan.zhredisbatch.controller.request.PostMultiSetRequest;
 import com.zhanghan.zhredisbatch.controller.response.ListMultiGetResponse;
 import com.zhanghan.zhredisbatch.dto.BatchRedisDto;
@@ -43,7 +44,7 @@ public class BatchRedisServiceImpl implements BatchRedisService {
     private RedisTemplate<String, String> strRedisTemplate;
 
     /**
-     * 记录用户访问记录
+     * Redis批量Set
      */
     @Override
     public Object postMultiSet(PostMultiSetRequest postMultiSetRequest) {
@@ -58,7 +59,7 @@ public class BatchRedisServiceImpl implements BatchRedisService {
     }
 
     /**
-     * 批量将缓存中的数据同步到MySQL
+     * Redis批量Get
      */
     @Override
     public Object listMultiGet(ListMultiGetRequest listMultiGetRequest) {
@@ -67,12 +68,12 @@ public class BatchRedisServiceImpl implements BatchRedisService {
         List<BatchRedisDto> batchRedisDtoList = new ArrayList<>();
         ListMultiGetResponse listMultiGetResponse = new ListMultiGetResponse();
 
-        BatchRedisDto batchRedisDto = new BatchRedisDto();
         for (int i = 0; i < valueList.size(); i++) {
             String value = valueList.get(i);
             if (StringUtils.isEmpty(value)) {
                 continue;
             }
+            BatchRedisDto batchRedisDto = new BatchRedisDto();
             batchRedisDto.setRedisKey(keyList.get(i));
             batchRedisDto.setRedisValue(value);
             batchRedisDtoList.add(batchRedisDto);
@@ -83,6 +84,9 @@ public class BatchRedisServiceImpl implements BatchRedisService {
         return WrapMapper.ok(listMultiGetResponse);
     }
 
+    /**
+     * Redis批量Set且设置失效时间
+     */
     @Override
     public Object postMultiSetAndExpire(PostMultiSetRequest postMultiSetRequest) {
         List<BatchRedisDto> batchRedisDtoList = postMultiSetRequest.getBatchRedisDtoList();
@@ -98,7 +102,15 @@ public class BatchRedisServiceImpl implements BatchRedisService {
             }
         });
 
+        return WrapMapper.ok();
+    }
 
+    /**
+     * Redis批量Delete
+     */
+    @Override
+    public Object postMultiDelete(PostMultiDeleteRequest postMultiDeleteRequest) {
+        strRedisTemplate.delete(postMultiDeleteRequest.getKeyList());
         return WrapMapper.ok();
     }
 
