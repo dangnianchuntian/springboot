@@ -391,3 +391,22 @@
 
 * 博客地址：
     * [SpringBoot实战（十七）:Redis Pipeline 轻松实现百倍性能提升（续）](https://zhanghan.blog.csdn.net/article/details/108305904 "别忘记点赞哦")
+    
+    
+# 20.SpringBoot实战（十八）:签到奖励实现方案
+
+* 代码版本: 2.1.0-Release
+
+* 功能：
+    * 进行签到
+    * 签到记录查询
+    
+* 技术栈：  
+    * SpringBoot
+    * MySQL
+          
+* 启动项目并验证
+    * 启动zh-sign-in
+
+* 博客地址：
+    * [SpringBoot实战（十八）:签到奖励实现方案](https://zhanghan.blog.csdn.net/article/details/108306434 "别忘记点赞哦")    
