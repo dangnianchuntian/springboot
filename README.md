@@ -370,3 +370,24 @@
 
 * 博客地址：
     * [Spring Boot实战分页查询附近的人: Redis+GeoHash+Lua](https://blog.csdn.net/zhanghan18333611647/article/details/107897938 "别忘记点赞哦")
+
+
+# 19.SpringBoot实战（十七）:Redis Pipeline 轻松实现百倍性能提升（续）
+
+* 代码版本: 2.0.0-Release
+
+* 功能：
+    * 批量set
+    * 批量get
+    * 批量set且设置失效时间
+    * 批量delete
+    
+* 技术栈：  
+    * SpringBoot
+    * Redis
+          
+* 启动项目并验证
+    * 启动zh-redis-batch
+
+* 博客地址：
+    * [SpringBoot实战（十七）:Redis Pipeline 轻松实现百倍性能提升（续）](https://zhanghan.blog.csdn.net/article/details/108305904 "别忘记点赞哦")
