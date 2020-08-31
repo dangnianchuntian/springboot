@@ -23,6 +23,7 @@
         <module>zh-nearby-people</module>
         <module>zh-sign-in</module>
         <module>zh-redis-batch</module>
+        <module>zh-elk-boot</module>
     </modules>
 
     <properties>
