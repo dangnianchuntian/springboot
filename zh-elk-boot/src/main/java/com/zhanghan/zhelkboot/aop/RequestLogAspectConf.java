@@ -1,7 +1,7 @@
 /*
- * Copyright (c) 2019. zhanghan_java@163.com All Rights Reserved.
- * 项目名称：实战SpringBoot
- * 类名称：ControllerLogAspectConf.java
+ * Copyright (c) 2020. zhanghan_java@163.com All Rights Reserved.
+ * 项目名称：SpringBoot项目接入ELK
+ * 类名称：RequestLogAspectConf.java
  * 创建人：张晗
  * 联系方式：zhanghan_java@163.com
  * 开源地址: https://github.com/dangnianchuntian/springboot
@@ -15,6 +15,8 @@ import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.Order;
 import org.springframework.core.env.Environment;
@@ -32,6 +34,8 @@ public class RequestLogAspectConf {
 
     @Autowired
     private Environment env;
+
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     /**
      * 范围切点方法
@@ -58,7 +62,7 @@ public class RequestLogAspectConf {
 
             FileBeatLogUtil.writeRequestInfo(request, applicationName, reqName, requestParams);
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            logger.error("authLogic;Exception:{}", e.getMessage());
         }
 
     }

@@ -1,6 +1,6 @@
 /*
- * Copyright (c) 2019. zhanghan_java@163.com All Rights Reserved.
- * 项目名称：实战SpringBoot
+ * Copyright (c) 2020. zhanghan_java@163.com All Rights Reserved.
+ * 项目名称：SpringBoot项目接入ELK
  * 类名称：Wrapper.java
  * 创建人：张晗
  * 联系方式：zhanghan_java@163.com
@@ -50,13 +50,6 @@ public class Wrapper<T> implements Serializable {
      * 错误信息.
      */
     public static final String ERROR_MESSAGE = "系统异常";
-
-    @Data
-    public static class Body<T> implements Serializable {
-        private int code;
-        private String message;
-        private T result;
-    }
 
     /**
      * 编号.

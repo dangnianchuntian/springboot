@@ -1,7 +1,7 @@
 /*
- * Copyright (c) 2019. zhanghan_java@163.com All Rights Reserved.
- * 项目名称：实战SpringBoot
- * 类名称：ZhBootApplication.java
+ * Copyright (c) 2020. zhanghan_java@163.com All Rights Reserved.
+ * 项目名称：SpringBoot项目接入ELK
+ * 类名称：ZhElkBootApplication.java
  * 创建人：张晗
  * 联系方式：zhanghan_java@163.com
  * 开源地址: https://github.com/dangnianchuntian/springboot

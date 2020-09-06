@@ -1,6 +1,6 @@
 /*
- * Copyright (c) 2019. zhanghan_java@163.com All Rights Reserved.
- * 项目名称：实战SpringBoot
+ * Copyright (c) 2020. zhanghan_java@163.com All Rights Reserved.
+ * 项目名称：SpringBoot项目接入ELK
  * 类名称：InterceptLog.java
  * 创建人：张晗
  * 联系方式：zhanghan_java@163.com
