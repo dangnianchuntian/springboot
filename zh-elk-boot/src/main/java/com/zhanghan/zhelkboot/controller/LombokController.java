@@ -13,8 +13,6 @@ package com.zhanghan.zhelkboot.controller;
 import com.zhanghan.zhelkboot.controller.request.LombokRequest;
 import com.zhanghan.zhelkboot.util.wrapper.WrapMapper;
 import com.zhanghan.zhelkboot.util.wrapper.Wrapper;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -26,12 +24,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
-@Api(value = "演示Lombok控制器",tags = {"演示Lombok控制器"})
 public class LombokController {
 
     private static Logger logger = LoggerFactory.getLogger(LombokController.class);
 
-    @ApiOperation(value="演示Lombok",tags = {"演示Lombok控制器"})
     @RequestMapping(value = "/lombok", method = RequestMethod.POST)
     public Wrapper lombok(@RequestBody LombokRequest lombokRequest) {
 

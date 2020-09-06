@@ -11,87 +11,89 @@
 package com.zhanghan.zhelkboot.util;
 
 import com.alibaba.fastjson.JSON;
+import com.zhanghan.zhelkboot.util.wrapper.Wrapper;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.slf4j.Logger;
 import org.slf4j.MDC;
-import org.springframework.core.MethodParameter;
-import org.springframework.http.MediaType;
-import org.springframework.util.StringUtils;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Enumeration;
-import java.util.LinkedHashMap;
+import java.util.*;
 
 public class FileBeatLogUtil {
 
-    public static void writeRequestInfo(MethodParameter methodParameter, MediaType mediaType, HttpServletRequest request) {
+    public static void writeRequestInfo(HttpServletRequest request, String applicationName, String reqName, String requestParams) {
 
-        String reqName = methodParameter.getDeclaringClass().getName() + "." + methodParameter.getMethod().getName();
-        String applicationName = "111";
         String requestURI = request.getRequestURI();
 
-        String requestParams = FileBeatLogUtil.getParams(request);
+        //获取requestHeader
+        Enumeration<String> requestHeaderNames = request.getHeaderNames();
+        Map<String, Object> reuestHeaderMap = new HashMap<>();
+        while (requestHeaderNames.hasMoreElements()) {
+            String name = requestHeaderNames.nextElement();
+            String value = request.getHeaders(name).nextElement();
+            reuestHeaderMap.put(name, value);
+        }
+        String requestHeader = "";
+        if (null != reuestHeaderMap && reuestHeaderMap.size() > 0) {
+            requestHeader = JSON.toJSONString(reuestHeaderMap);
+        }
 
-        /**
-         * 防止MDC值空指针，所有入参不为null
-         */
+        //防止MDC值空指针，所有入参不为null
         applicationName = org.springframework.util.StringUtils.isEmpty(applicationName) ? "" : applicationName;
         requestURI = org.springframework.util.StringUtils.isEmpty(requestURI) ? "" : requestURI;
         reqName = org.springframework.util.StringUtils.isEmpty(reqName) ? "" : reqName;
         requestParams = "null".equals(requestParams) ? "" : requestParams;
-        /**
-         * MDC值为ES键值对JSON信息
-         */
+
+        //MDC值为ES键值对JSON信息
         MDC.put("applicationName", applicationName);
+        MDC.put("requestTime", getStringTodayTime());
         MDC.put("requestURI", requestURI);
+        MDC.put("requestHeader", requestHeader);
         MDC.put("sourceName", reqName);
         MDC.put("requestParams", requestParams);
-        MDC.put("responseHeader", "");
-        MDC.put("responseCode", "");
-        MDC.put("responseMsg", "");
-        MDC.put("responseBody", "");
-        MDC.put("responseTime", "");
-        MDC.put("exception", "");
     }
 
-    public static void writeLog(Logger log, String applicationName, String reqName, String params) {
+    public static void writeResponseLog(Object o, Logger log, HttpServletResponse response) {
 
-        ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
-        HttpServletRequest request = attributes.getRequest();
-        String requestURI = request.getRequestURI();
+        //取responseHeader内容
+        Map<String, Object> responseHeaderMap = new HashMap<>();
+        Collection<String> headerNames = response.getHeaderNames();
+        headerNames.forEach(name -> {
+            responseHeaderMap.put(name, response.getHeader(name));
+        });
+        String strResponseHeader = "";
+        if (null != responseHeaderMap && responseHeaderMap.size() > 0) {
+            strResponseHeader = JSON.toJSONString(responseHeaderMap);
+        }
+
+        //获取response内容
+        String responseCode = "";
+        String responseMsg = "";
+        String responseBody = "";
+        Wrapper wrapper;
+        if (null != o) {
+            wrapper = (Wrapper) o;
+            if (null != wrapper) {
+                responseCode = String.valueOf(wrapper.getCode());
+                responseMsg = wrapper.getMessage();
+                responseBody = wrapper.getResult().toString();
+            }
+        }
 
 
-        /**
-         * 防止MDC值空指针，所有入参不为null
-         */
-        applicationName = StringUtils.isEmpty(applicationName) ? "" : applicationName;
-        requestURI = StringUtils.isEmpty(requestURI) ? "" : requestURI;
-        reqName = StringUtils.isEmpty(reqName) ? "" : reqName;
-        params = "null".equals(params) ? "" : params;
-        /**
-         * map值为ES备份字符串信息(此字符串不会被ES解析为JSON字符串)
-         */
-        LinkedHashMap<String, Object> reqInfo = new LinkedHashMap<>();
-        reqInfo.put("applicationName", applicationName);
-        reqInfo.put("requestURI", requestURI);
-        reqInfo.put("sourceName", reqName);
-
-        reqInfo.put("httpParams", params);
-        /**
-         * MDC值为ES键值对JSON信息
-         */
-        MDC.put("responseCode", "code");
-        MDC.put("responseMsg", "");
-        MDC.put("responseBody", params);
+        //MDC值为ES键值对JSON信息
+        MDC.put("responseHeader", strResponseHeader);
+        MDC.put("responseCode", responseCode);
+        MDC.put("responseMsg", responseMsg);
+        MDC.put("responseBody", responseBody);
         MDC.put("responseTime", getStringTodayTime());
-        String reqInfoJsonStr = JSON.toJSONString(reqInfo);
-        log.info(reqInfoJsonStr);
 
+        Map<String, String> copyOfContextMap = MDC.getCopyOfContextMap();
+        String reqInfoJsonStr = JSON.toJSONString(copyOfContextMap);
+        log.info(reqInfoJsonStr);
     }
 
     /**
@@ -111,23 +113,6 @@ public class FileBeatLogUtil {
                 linkedHashMap.put(thisArgName, thisArgValue);
             }
         }
-        return JSON.toJSONString(linkedHashMap);
-    }
-
-    public static String getParams(HttpServletRequest request) {
-
-        Enumeration<String> argNames = request.getParameterNames();
-        LinkedHashMap<String, Object> linkedHashMap = new LinkedHashMap<>();
-        if (null == argNames) {
-            return JSON.toJSONString(linkedHashMap);
-        }
-
-        while (argNames.hasMoreElements()) {
-            String thisArgName = argNames.nextElement();
-            String thisArgValue = request.getParameter(thisArgName);
-            linkedHashMap.put(thisArgName, thisArgValue);
-        }
-
         return JSON.toJSONString(linkedHashMap);
     }
 

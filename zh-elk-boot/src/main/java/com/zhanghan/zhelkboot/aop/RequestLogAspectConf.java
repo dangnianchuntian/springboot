@@ -15,18 +15,20 @@ import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.Order;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
+
+import javax.servlet.http.HttpServletRequest;
 
 @Aspect
 @Order(0)
 @Component
 public class RequestLogAspectConf {
 
+    @Autowired
+    private HttpServletRequest request;
 
     @Autowired
     private Environment env;
@@ -46,7 +48,6 @@ public class RequestLogAspectConf {
     private void authLogic(JoinPoint joinPoint) {
 
         try {
-            Logger log = LoggerFactory.getLogger("logstashInfo");
 
             String applicationName = env.getProperty("spring.application.name");
 
@@ -55,7 +56,7 @@ public class RequestLogAspectConf {
 
             String requestParams = FileBeatLogUtil.getParams(joinPoint);
 
-            FileBeatLogUtil.writeLog(log, applicationName, reqName, requestParams);
+            FileBeatLogUtil.writeRequestInfo(request, applicationName, reqName, requestParams);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }

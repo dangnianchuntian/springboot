@@ -9,19 +9,11 @@
 
     <!-- logstash相关属性 -->
     <springProperty scope="context" name="springAppName" source="spring.application.name"/>
-    <springProperty scope="context" name="logstashPath" source="logstash.path"/>
-    <property name="LOGSTASH_LOG_FILE" value="${logstashPath}/${springAppName}.json"/>
+    <property name="LOGSTASH_LOG_FILE" value="/data/elklogs/${springAppName}.json"/>
 
-    <springProperty scope="context" name="LOG_HOME" source="spring.application.name"/>
-
-    <springProfile name="local">
-        <property name="LOG_PATH" value="D:/www/logs/common"/> <!-- 日志保存目录 -->
-    </springProfile>
-    <springProfile name="dev">
-        <property name="LOG_PATH" value="/data/logs/common" /> <!-- 日志保存目录 -->
-    </springProfile>
-
-    <property name="appName" value="common"/>
+    <property name="appName" value="zhElkBoot"/>
+    <property name="LOG_HOME" value="zhElkBoot"/>
+    <property name="LOG_PATH" value="/data/log/zh-elk-boot-log"/>
     <property name="maxSaveDays" value="365"/><!-- 日志最大保存天数 -->
     <property name="maxFileSize" value="200MB"/><!-- 单个文件最大大小 -->
     <appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
@@ -30,6 +22,7 @@
             <charset>UTF-8</charset>
         </encoder>
     </appender>
+
 
     <appender name="rollingFileConsole" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
@@ -40,7 +33,7 @@
             </timeBasedFileNamingAndTriggeringPolicy>
         </rollingPolicy>
         <encoder>
-            <pattern>%d{yyyy-MM-dd HH:mm:ss} %highlight(%-5level) %green([${LOG_HOME},%X{X-B3-TraceId:-},%X{X-B3-SpanId:-},%X{X-Span-Export:-}]) %magenta(${PID:-}) %white(---) %-20(%yellow([%20.20thread])) %-55(%cyan(%.32logger{30}:%L)) %highlight(- %msg%n)</pattern>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss}[%X{X-B3-TraceId:-},%X{X-B3-SpanId:-}][%p][%c{0}-%M]-%m%n</pattern>
             <charset>UTF-8</charset>
         </encoder>
     </appender>
@@ -54,7 +47,7 @@
             </timeBasedFileNamingAndTriggeringPolicy>
         </rollingPolicy>
         <encoder>
-            <pattern>%d{"yyyy-MM-dd HH:mm:ss,SSS"}[%X{userId}|%X{sessionId}][%p][%c{0}-%M]-%m%n</pattern>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss}[%X{X-B3-TraceId:-},%X{X-B3-SpanId:-}][%p][%c{0}-%M]-%m%n</pattern>
             <charset>UTF-8</charset>
         </encoder>
         <filter class="ch.qos.logback.classic.filter.LevelFilter">
@@ -73,7 +66,7 @@
             </timeBasedFileNamingAndTriggeringPolicy>
         </rollingPolicy>
         <encoder>
-            <pattern>%d{"yyyy-MM-dd HH:mm:ss,SSS"}[%X{userId}|%X{sessionId}][%p][%c{0}-%M]-%m%n</pattern>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss}[%X{X-B3-TraceId:-},%X{X-B3-SpanId:-}][%p][%c{0}-%M]-%m%n</pattern>
             <charset>UTF-8</charset>
         </encoder>
         <filter class="ch.qos.logback.classic.filter.LevelFilter">
@@ -82,6 +75,23 @@
             <onMismatch>DENY</onMismatch>
         </filter>
     </appender>
+
+    <logger name="com.ibatis" level="DEBUG"/>
+    <logger name="com.ibatis.common.jdbc.SimpleDataSource" level="DEBUG"/>
+    <logger name="com.ibatis.common.jdbc.ScriptRunner" level="DEBUG"/>
+    <logger name="com.ibatis.sqlmap.engine.impl.SqlMapClientDelegate"
+            level="INFO"/>
+    <logger name="java.sql.Connection" level="DEBUG"/>
+    <logger name="java.sql.Statement" level="DEBUG"/>
+    <logger name="java.sql.PreparedStatement" level="DEBUG"/>
+    <logger name="com.netflix.discovery" additivity="true" level="ERROR"/>
+    <!-- 生产环境，将此级别配置为适合的级别，以名日志文件太多或影响程序性能 -->
+    <root level="INFO">
+        <appender-ref ref="rollingFileConsole"/>
+        <appender-ref ref="rollingFileInfo"/>
+        <appender-ref ref="rollingFileError"/>
+        <appender-ref ref="stdout"/>
+    </root>
 
     <appender name="logstashInfoLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <!-- 此日志文件只记录info级别的 -->
@@ -116,14 +126,15 @@
                         "message": "%message",
                         "applicationName" : "%X{applicationName}",
                         "requestURI" : "%X{requestURI}",
+                        "requestHeader" : "%X{requestHeader}",
                         "sourceName" : "%X{sourceName}",
                         "requestParams" : "%X{requestParams}",
                         "requestTime" : "%X{requestTime}",
+                        "responseHeader" : "%X{responseHeader}",
                         "responseCode" : "%X{responseCode}",
                         "responseMsg" : "%X{responseMsg}",
                         "responseBody" : "%X{responseBody}",
-                        "responseTime" : "%X{responseTime}",
-                        "exception" : "%X{exception}"
+                        "responseTime" : "%X{responseTime}"
                         }
                     </pattern>
                 </pattern>
@@ -137,52 +148,4 @@
     </logger>
 
 
-    <!--    <appender name="rollingFileSql" class="ch.qos.logback.core.rolling.RollingFileAppender">-->
-    <!--        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">-->
-    <!--            <fileNamePattern>${LOG_PATH}/${appName}-log-sql-%d{yyyy-MM-dd}.%i.log.zip</fileNamePattern>-->
-    <!--            <maxHistory>${maxSaveDays}</maxHistory> &lt;!&ndash;max save days &ndash;&gt;-->
-    <!--            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">-->
-    <!--                <maxFileSize>${maxFileSize}</maxFileSize>-->
-    <!--            </timeBasedFileNamingAndTriggeringPolicy>-->
-    <!--        </rollingPolicy>-->
-    <!--        <encoder>-->
-    <!--            <pattern>%d{"yyyy-MM-dd HH:mm:ss,SSS"}[%X{userId}|%X{sessionId}][%p][%c{0}-%M]-%m%n</pattern>-->
-    <!--            <charset>UTF-8</charset>-->
-    <!--        </encoder>-->
-    <!--    </appender>-->
-
-
-
-    <!--    &lt;!&ndash;需要将日志单独输出的包路径&ndash;&gt;-->
-    <!--    <logger name="org.hospital.service.intercept.SqlInterceptor" additivity="false">-->
-    <!--        <appender-ref ref="rollingFileSql"/>-->
-    <!--    </logger>-->
-
-    <!--需要将日志单独输出的包路径-->
-    <!--<logger name="org.hospital.service.fiter.LogFilter" additivity="false">-->
-    <!--<appender-ref ref="SIFT"/>-->
-    <!--</logger>-->
-    <!--<logger name="org.hospital.service.fiter.bean.ResponseLog" additivity="false">-->
-    <!--<appender-ref ref="SIFT"/>-->
-    <!--</logger>-->
-
-    <!-- 为单独的包配置日志级别，若root的级别大于此级别， 此处级别也会输出 应用场景：生产环境一般不会将日志级别设置为trace或debug，但是为详细的记录SQL语句的情况，
-        可将hibernate的级别设置为debug，如此一来，日志文件中就会出现hibernate的debug级别日志， 而其它包则会按root的级别输出日志 -->
-    <!-- <logger name="org.springframework" level="DEBUG" /> -->
-    <logger name="com.ibatis" level="DEBUG"/>
-    <logger name="com.ibatis.common.jdbc.SimpleDataSource" level="DEBUG"/>
-    <logger name="com.ibatis.common.jdbc.ScriptRunner" level="DEBUG"/>
-    <logger name="com.ibatis.sqlmap.engine.impl.SqlMapClientDelegate"
-            level="INFO"/>
-    <logger name="java.sql.Connection" level="DEBUG"/>
-    <logger name="java.sql.Statement" level="DEBUG"/>
-    <logger name="java.sql.PreparedStatement" level="DEBUG"/>
-    <logger name="com.netflix.discovery" additivity="true" level="ERROR"/>
-    <!-- 生产环境，将此级别配置为适合的级别，以名日志文件太多或影响程序性能 -->
-    <root level="INFO">
-        <appender-ref ref="rollingFileConsole"/>
-        <appender-ref ref="rollingFileInfo"/>
-        <appender-ref ref="rollingFileError"/>
-        <appender-ref ref="stdout"/>
-    </root>
 </configuration>
