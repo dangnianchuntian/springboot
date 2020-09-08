@@ -133,36 +133,6 @@
         <appender-ref ref="logstashInfoLog"/>
     </logger>
 
-
-    <!--    <appender name="rollingFileSql" class="ch.qos.logback.core.rolling.RollingFileAppender">-->
-    <!--        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">-->
-    <!--            <fileNamePattern>${LOG_PATH}/${appName}-log-sql-%d{yyyy-MM-dd}.%i.log.zip</fileNamePattern>-->
-    <!--            <maxHistory>${maxSaveDays}</maxHistory> &lt;!&ndash;max save days &ndash;&gt;-->
-    <!--            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">-->
-    <!--                <maxFileSize>${maxFileSize}</maxFileSize>-->
-    <!--            </timeBasedFileNamingAndTriggeringPolicy>-->
-    <!--        </rollingPolicy>-->
-    <!--        <encoder>-->
-    <!--            <pattern>%d{"yyyy-MM-dd HH:mm:ss,SSS"}[%X{userId}|%X{sessionId}][%p][%c{0}-%M]-%m%n</pattern>-->
-    <!--            <charset>UTF-8</charset>-->
-    <!--        </encoder>-->
-    <!--    </appender>-->
-
-
-
-    <!--    &lt;!&ndash;需要将日志单独输出的包路径&ndash;&gt;-->
-    <!--    <logger name="org.hospital.service.intercept.SqlInterceptor" additivity="false">-->
-    <!--        <appender-ref ref="rollingFileSql"/>-->
-    <!--    </logger>-->
-
-    <!--需要将日志单独输出的包路径-->
-    <!--<logger name="org.hospital.service.fiter.LogFilter" additivity="false">-->
-    <!--<appender-ref ref="SIFT"/>-->
-    <!--</logger>-->
-    <!--<logger name="org.hospital.service.fiter.bean.ResponseLog" additivity="false">-->
-    <!--<appender-ref ref="SIFT"/>-->
-    <!--</logger>-->
-
     <!-- 为单独的包配置日志级别，若root的级别大于此级别， 此处级别也会输出 应用场景：生产环境一般不会将日志级别设置为trace或debug，但是为详细的记录SQL语句的情况，
         可将hibernate的级别设置为debug，如此一来，日志文件中就会出现hibernate的debug级别日志， 而其它包则会按root的级别输出日志 -->
     <!-- <logger name="org.springframework" level="DEBUG" /> -->
