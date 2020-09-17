@@ -12,11 +12,13 @@ package com.zhanghan.zhelkboot.aop;
 
 import com.zhanghan.zhelkboot.util.FileBeatLogUtil;
 import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.aop.aspectj.MethodInvocationProceedingJoinPoint;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.Order;
 import org.springframework.core.env.Environment;
@@ -62,9 +64,24 @@ public class RequestLogAspectConf {
 
             FileBeatLogUtil.writeRequestInfo(request, applicationName, reqName, requestParams);
         } catch (Exception e) {
-            logger.error("authLogic;Exception:{}", e.getMessage());
+            logger.error("RequestLogAspectConf;authLogic;Exception:{}", e.getMessage());
         }
 
+    }
+
+    @AfterThrowing(throwing = "ex", pointcut = "methodPointCut()")
+    public void throwss(JoinPoint joinPoint, Exception ex) {
+        try {
+            FileBeatLogUtil.writeExceptionLog(getClassAndMethodName(joinPoint), joinPoint.getArgs().toString(), ex.getMessage());
+        } catch (Exception e) {
+            logger.error("RequestLogAspectConf;writeExceptionLog;Exception:{}", e.getMessage());
+        }
+    }
+
+    private String getClassAndMethodName(JoinPoint joinPoint) {
+        String classAndMethodName = joinPoint.toShortString().substring(10);
+        classAndMethodName = classAndMethodName.substring(0, classAndMethodName.length() - 1);
+        return classAndMethodName;
     }
 
 }

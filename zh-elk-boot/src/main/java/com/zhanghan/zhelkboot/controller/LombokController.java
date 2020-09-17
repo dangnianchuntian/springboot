@@ -37,6 +37,7 @@ public class LombokController {
         map.put("intLombok", lombokRequest.getIntLombok());
         map.put("strLombok", lombokRequest.getStrLombok());
         map.put("boleanLombok", lombokRequest.getBoleanLombok());
+        int a = 2 / 0;
         map.put("personLombok", lombokRequest.getPersonLombok());
         return WrapMapper.ok(map);
     }

@@ -16,6 +16,7 @@ import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.slf4j.Logger;
 import org.slf4j.MDC;
+import org.springframework.util.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -42,9 +43,9 @@ public class FileBeatLogUtil {
         }
 
         //防止MDC值空指针，所有入参不为null
-        applicationName = org.springframework.util.StringUtils.isEmpty(applicationName) ? "" : applicationName;
-        requestURI = org.springframework.util.StringUtils.isEmpty(requestURI) ? "" : requestURI;
-        reqName = org.springframework.util.StringUtils.isEmpty(reqName) ? "" : reqName;
+        applicationName = StringUtils.isEmpty(applicationName) ? "" : applicationName;
+        requestURI = StringUtils.isEmpty(requestURI) ? "" : requestURI;
+        reqName = StringUtils.isEmpty(reqName) ? "" : reqName;
         requestParams = "null".equals(requestParams) ? "" : requestParams;
 
         //MDC值为ES键值对JSON信息
@@ -54,6 +55,17 @@ public class FileBeatLogUtil {
         MDC.put("requestHeader", requestHeader);
         MDC.put("sourceName", reqName);
         MDC.put("requestParams", requestParams);
+    }
+
+    public static void writeExceptionLog(String exceptionMethodName, String exceptionMethodArgs, String exceptionMessage) {
+        exceptionMethodName = StringUtils.isEmpty(exceptionMethodName) ? "" : exceptionMethodName;
+        exceptionMethodArgs = StringUtils.isEmpty(exceptionMethodArgs) ? "" : exceptionMethodArgs;
+        exceptionMessage = StringUtils.isEmpty(exceptionMessage) ? "" : exceptionMessage;
+        //MDC值为ES键值对JSON信息
+        MDC.put("exceptionMethodName", exceptionMethodName);
+        MDC.put("exceptionMethodArgs", exceptionMethodArgs);
+        MDC.put("exceptionMessage", exceptionMessage);
+
     }
 
     public static void writeResponseLog(Object o, Logger log, HttpServletResponse response) {
@@ -79,7 +91,10 @@ public class FileBeatLogUtil {
             if (null != wrapper) {
                 responseCode = String.valueOf(wrapper.getCode());
                 responseMsg = wrapper.getMessage();
-                responseBody = wrapper.getResult().toString();
+                Object result = wrapper.getResult();
+                if (null != result) {
+                    responseBody = result.toString();
+                }
             }
         }
 
