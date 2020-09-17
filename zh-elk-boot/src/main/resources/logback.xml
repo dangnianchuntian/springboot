@@ -130,6 +130,7 @@
                         "sourceName" : "%X{sourceName}",
                         "requestParams" : "%X{requestParams}",
                         "requestTime" : "%X{requestTime}",
+                        "exceptionKnownType" : "%X{exceptionKnownType}",
                         "exceptionMethodName" : "%X{exceptionMethodName}",
                         "exceptionMethodArgs" : "%X{exceptionMethodArgs}",
                         "exceptionMessage" : "%X{exceptionMessage}",

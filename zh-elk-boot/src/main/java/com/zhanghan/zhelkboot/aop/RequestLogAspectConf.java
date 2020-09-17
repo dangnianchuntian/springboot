@@ -18,13 +18,13 @@ import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.aop.aspectj.MethodInvocationProceedingJoinPoint;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.Order;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Arrays;
 
 @Aspect
 @Order(0)
@@ -72,7 +72,8 @@ public class RequestLogAspectConf {
     @AfterThrowing(throwing = "ex", pointcut = "methodPointCut()")
     public void throwss(JoinPoint joinPoint, Exception ex) {
         try {
-            FileBeatLogUtil.writeExceptionLog(getClassAndMethodName(joinPoint), joinPoint.getArgs().toString(), ex.getMessage());
+            String methodArgs = Arrays.toString(joinPoint.getArgs());
+            FileBeatLogUtil.writeExceptionLog(false, getClassAndMethodName(joinPoint), methodArgs, ex.getMessage());
         } catch (Exception e) {
             logger.error("RequestLogAspectConf;writeExceptionLog;Exception:{}", e.getMessage());
         }

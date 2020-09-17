@@ -144,7 +144,7 @@ public class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
     public Wrapper exception(Exception e) {
-        log.error("Exception={}", e.getMessage());
+        log.error("Exception={}", e.getMessage(), e);
         return WrapMapper.error();
     }
 }
