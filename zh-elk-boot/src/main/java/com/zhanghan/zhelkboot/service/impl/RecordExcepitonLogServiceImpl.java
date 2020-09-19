@@ -22,7 +22,7 @@ import java.util.Map;
 public class RecordExcepitonLogServiceImpl implements RecordExcepitonLogService {
 
     /**
-     * Redis批量Set
+     * 记录异常
      */
     @Override
     public Object recordExcepitonLog(RecordExceptionLogRequest recordExceptionLogRequest) {
