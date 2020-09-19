@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2020. zhanghan_java@163.com All Rights Reserved.
  * 项目名称：SpringBoot项目接入ELK
- * 类名称：LombokRequest.java
+ * 类名称：RecordExceptionLogRequest.java
  * 创建人：张晗
  * 联系方式：zhanghan_java@163.com
  * 开源地址: https://github.com/dangnianchuntian/springboot
@@ -17,7 +17,7 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class ExceptionRequest {
+public class RecordExceptionLogRequest {
 
     @NotNull
     private Integer divisor;

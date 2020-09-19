@@ -12,7 +12,6 @@ package com.zhanghan.zhelkboot.aop;
 
 import com.zhanghan.zhelkboot.util.FileBeatLogUtil;
 import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
@@ -24,7 +23,6 @@ import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Arrays;
 
 @Aspect
 @Order(0)
@@ -67,22 +65,6 @@ public class RequestLogAspectConf {
             logger.error("RequestLogAspectConf;authLogic;Exception:{}", e.getMessage());
         }
 
-    }
-
-    @AfterThrowing(throwing = "ex", pointcut = "methodPointCut()")
-    public void throwss(JoinPoint joinPoint, Exception ex) {
-        try {
-            String methodArgs = Arrays.toString(joinPoint.getArgs());
-            FileBeatLogUtil.writeExceptionLog(false, getClassAndMethodName(joinPoint), methodArgs, ex.getMessage());
-        } catch (Exception e) {
-            logger.error("RequestLogAspectConf;writeExceptionLog;Exception:{}", e.getMessage());
-        }
-    }
-
-    private String getClassAndMethodName(JoinPoint joinPoint) {
-        String classAndMethodName = joinPoint.toShortString().substring(10);
-        classAndMethodName = classAndMethodName.substring(0, classAndMethodName.length() - 1);
-        return classAndMethodName;
     }
 
 }

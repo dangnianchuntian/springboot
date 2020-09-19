@@ -55,20 +55,14 @@ public class FileBeatLogUtil {
         MDC.put("requestHeader", requestHeader);
         MDC.put("sourceName", reqName);
         MDC.put("requestParams", requestParams);
+        MDC.put("exceptionCount", "0");
     }
 
-    public static void writeExceptionLog(Boolean isKnownException, String exceptionMethodName, String exceptionMethodArgs, String exceptionMessage) {
-        String exceptionKnownType = "unKnownException";
-        if (isKnownException) {
-            exceptionKnownType = "knownException";
-        }
-        exceptionMethodName = StringUtils.isEmpty(exceptionMethodName) ? "" : exceptionMethodName;
-        exceptionMethodArgs = StringUtils.isEmpty(exceptionMethodArgs) ? "" : exceptionMethodArgs;
-        exceptionMessage = StringUtils.isEmpty(exceptionMessage) ? "" : exceptionMessage;
+    public static void writeExceptionLog(String exceptionMethodName, String exceptionMethodArgs, String exceptionMessage) {
+
+        MDC.put("exceptionCount", "1");
+        exceptionMessage = String.format("MethodName:%s;Args:%s;Exception:%s", exceptionMethodName, exceptionMethodArgs, exceptionMessage);
         //MDC值为ES键值对JSON信息
-        MDC.put("exceptionKnownType", exceptionKnownType);
-        MDC.put("exceptionMethodName", exceptionMethodName);
-        MDC.put("exceptionMethodArgs", exceptionMethodArgs);
         MDC.put("exceptionMessage", exceptionMessage);
 
     }

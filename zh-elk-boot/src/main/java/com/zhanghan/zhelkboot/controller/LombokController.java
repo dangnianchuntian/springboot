@@ -10,9 +10,7 @@
 
 package com.zhanghan.zhelkboot.controller;
 
-import com.zhanghan.zhelkboot.controller.request.ExceptionRequest;
 import com.zhanghan.zhelkboot.controller.request.LombokRequest;
-import com.zhanghan.zhelkboot.util.FileBeatLogUtil;
 import com.zhanghan.zhelkboot.util.wrapper.WrapMapper;
 import com.zhanghan.zhelkboot.util.wrapper.Wrapper;
 import org.slf4j.Logger;
@@ -40,32 +38,6 @@ public class LombokController {
         map.put("strLombok", lombokRequest.getStrLombok());
         map.put("boleanLombok", lombokRequest.getBoleanLombok());
         map.put("personLombok", lombokRequest.getPersonLombok());
-        return WrapMapper.ok(map);
-    }
-
-    @RequestMapping(value = "/unknown/exception", method = RequestMethod.POST)
-    public Wrapper unknownException(@RequestBody ExceptionRequest exceptionRequest) {
-
-        Integer divisor = exceptionRequest.getDivisor();
-        int consult = 2 / divisor;
-        Map<String, Object> map = new HashMap();
-        map.put("consult", consult);
-        return WrapMapper.ok(map);
-    }
-
-    @RequestMapping(value = "/known/exception", method = RequestMethod.POST)
-    public Wrapper knownException(@RequestBody ExceptionRequest exceptionRequest) {
-
-        Integer divisor = exceptionRequest.getDivisor();
-        int consult;
-        try {
-            consult = 2 / divisor;
-        } catch (Exception e) {
-            FileBeatLogUtil.writeExceptionLog(true, "LombokController.knownException(..)", exceptionRequest.toString(), e.getMessage());
-            return WrapMapper.error();
-        }
-        Map<String, Object> map = new HashMap();
-        map.put("consult", consult);
         return WrapMapper.ok(map);
     }
 
