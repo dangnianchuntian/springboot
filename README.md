@@ -445,4 +445,5 @@
     * [从零学ELK系列（八）:SpringBoot项目接入ELK（超详细图文教程）](https://zhanghan.blog.csdn.net/article/details/103747262 "别忘记点赞哦")
     * [从零学ELK系列（九）:Nginx接入ELK（超详细图文教程）](https://zhanghan.blog.csdn.net/article/details/103857685 "别忘记点赞哦")
     * [从零学ELK系列（十）:SpringBoot项目接入ELK升级版（超详细图文教程）](https://zhanghan.blog.csdn.net/article/details/108462219 "别忘记点赞哦")
+    * [从零学ELK系列（十一）:SpringBoot项目接入ELK超级版（超详细图文教程）](https://zhanghan.blog.csdn.net/article/details/108687333 "别忘记点赞哦")
     
