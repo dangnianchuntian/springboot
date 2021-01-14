@@ -10,7 +10,7 @@
 
 package com.zhanghan.zhnearbypeople.controller.request;
 
-import com.sun.istack.internal.NotNull;
+import javax.validation.constraints.NotNull;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

@@ -11,7 +11,7 @@
 package com.zhanghan.zhsignin.controller.request;
 
 
-import com.sun.istack.internal.NotNull;
+import javax.validation.constraints.NotNull;
 import lombok.Data;
 
 @Data

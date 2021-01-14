@@ -11,7 +11,7 @@
 package com.zhanghan.zhredisbatch.controller.request;
 
 
-import com.sun.istack.internal.NotNull;
+import javax.validation.constraints.NotNull;
 import com.zhanghan.zhredisbatch.dto.BatchRedisDto;
 import lombok.Data;
 import lombok.NoArgsConstructor;
