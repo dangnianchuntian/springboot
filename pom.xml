@@ -39,7 +39,7 @@
         <spring-boot-admin-client.version>2.2.4</spring-boot-admin-client.version>
         <lombok.version>1.18.12</lombok.version>
         <jackson-dataformat-xml.version>2.9.9</jackson-dataformat-xml.version>
-        <alibaba-fastjson.version>1.2.62</alibaba-fastjson.version>
+        <alibaba-fastjson.version>1.2.83</alibaba-fastjson.version>
         <logstash-logback-encoder.version>6.3</logstash-logback-encoder.version>
         <hutool-all.version>5.3.9</hutool-all.version>
     </properties>
