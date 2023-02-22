@@ -34,7 +34,7 @@
         <jedis.version>3.3.0</jedis.version>
         <springfox-swagger2.version>2.9.2</springfox-swagger2.version>
         <springfox-swagger-ui.version>2.9.2</springfox-swagger-ui.version>
-        <commons-fileupload.version>1.3.3</commons-fileupload.version>
+        <commons-fileupload.version>1.5</commons-fileupload.version>
         <spring-boot-admin-starter-server.version>2.2.4</spring-boot-admin-starter-server.version>
         <spring-boot-admin-client.version>2.2.4</spring-boot-admin-client.version>
         <lombok.version>1.18.12</lombok.version>
